@@ -1,7 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * HW01<br>
+ * PR1_6: Prime Numbers
+ * Exercise 3.9
  */
 package pr1_6;
 import java.util.Scanner;
@@ -18,13 +18,15 @@ public class PR1_6 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        double num = 0;
+        boolean isPrime = false;
+        double num;
         Scanner input = new Scanner(System.in);
         num = input.nextDouble();
         
-        for(int i = 0; i < num; i++){
-            for (int j = 0; j < 100; j++){
-                
+        for(int i = 0; i < 100; i++){
+            isPrime = true;
+            for (int j = 1; j < i; j++){
+                if ()
             }
         }
     }
