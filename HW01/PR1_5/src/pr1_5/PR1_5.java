@@ -1,21 +1,22 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * HW01<br>
+ * PR1_5: Random Numbers
  */
 package pr1_5;
 
 import java.util.*;
 
 /**
- * HW01<br>
- * PR1_5: Random Numbers
+ * Outputs 25 random integer pairs with an explanation of weather the two 
+ * values are the same size or if one is larger than another.
  *
  * @author Brennan Metzelaar
  */
 public class PR1_5 {
 
     /**
+     * A for loop runs 25 times output the value and comparison of the two
+     * randomly generated values each time.
      * @param args the command line arguments
      */
     public static void main(String[] args) {
