@@ -1,7 +1,7 @@
 /*
  * HW02-PR2_3: Gerbil Map (11.4)
  * By: Brennan Metzelaar
- * Edited: 1/7/2015
+ * Edited: 1/8/2015
  * Due: 1/9/2015
  */
 package pr2_3;
@@ -10,6 +10,9 @@ import java.util.*;
 
 /**
  * Main class that executes the Gerbil program.
+ * <p>
+ * A gerbil is assigned a number at creation and has various methods, such as
+ * hopping.
  *
  * @author Brennan
  * @since 1/7/2015
@@ -17,13 +20,11 @@ import java.util.*;
 public class PR2_3 {
 
     /**
-     * A List is populated that consists of Gerbil objects.
-     * <p>
-     * The function takes in the user input of how many gerbils they want. Then
-     * each gerbil is given a number and is then told to hop. The number of each
-     * gerbil is output to the user.
+     * A Map is populated that consists of gerbil names(strings) and gerbil
+     * objects.
      *
-     * @param args There is no supported use of additional arguments.
+     * @param args Program does not specifically make use of additional 
+     * arguments at this time
      */
     public static void main(String[] args) {
         String[] names = new String[]{"Tom", "Sam", "Sue", "Jacob", "Will"};
@@ -33,25 +34,14 @@ public class PR2_3 {
             gerbilMap.put(names[i - 1], new Gerbil(i));
         }
 
+        System.out.println("The gerbils are beginning to hop!");
+        
         Iterator<String> it = gerbilMap.keySet().iterator();
-        String gName = it.next();
-        System.out.print(gName);
-        gerbilMap.get(gName).hop();
-        //System.out.print(gerbilMap.get(test).hop());
-
-        //System.out.println(gerbilMap.keySet().iterator().next());
-
-//        System.out.println("How many Gerbils are there?");
-//        Scanner input = new Scanner(System.in);
-//        size = input.nextInt();
-//        System.out.println("All of the gerbils have started hopping!?");
-//
-//        for (int i = 0; i < size; i++) {
-//            manyGerbils.add(new Gerbil(i));
-//        }
-//        for (int i = 0; i < manyGerbils.size(); i++) {
-//            Gerbil.hop(manyGerbils.get(i));
-//        }
+        while (it.hasNext()) {
+            String gName = it.next();
+            System.out.print(gName);
+            gerbilMap.get(gName).hop();
+        }
     }
 
 }

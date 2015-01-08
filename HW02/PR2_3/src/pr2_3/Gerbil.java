@@ -13,11 +13,6 @@ package pr2_3;
 public class Gerbil {
     private int gerbilNumber;
     
-//    /**
-//     * Default constructor initializes the number of gerbils to 5.
-//     */
-//    public Gerbil(){ gerbilNumber = 5; }
-    
     /**
      * Initialize the number that represents this Gerbil.
      * @param x the number of gerbils
@@ -25,11 +20,10 @@ public class Gerbil {
     public Gerbil(int x){ gerbilNumber = x; }
     
     /**
-     * Outputs that g gerbil is jumping
-     * @param g the number of the gerbil in question
+     * Outputs the gerbil's number and that the gerbil is hopping.
      */
     public void hop(){
-        System.out.println("Gerbil " + gerbilNumber + " is hopping!");
+        System.out.println("(#" + gerbilNumber + ")" + " is hopping!");
     }
     
     /**
