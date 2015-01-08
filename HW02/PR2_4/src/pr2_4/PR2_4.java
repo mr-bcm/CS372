@@ -23,8 +23,9 @@ public class PR2_4 {
         System.out.printf("Calculating PI from a depth of %d\n", depth);
         System.out.printf("PI: ");
         System.out.println(PI.Calculate(depth));
+        System.out.println();
         
-        PI.drawTable();
+        PI.drawTable(100000);
     }
     
 }
