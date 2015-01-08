@@ -28,9 +28,8 @@ public class Gerbil {
      * Outputs that g gerbil is jumping
      * @param g the number of the gerbil in question
      */
-    public static void hop(Object g){
-        Gerbil gerbil = (Gerbil)g;
-        System.out.println("Gerbil #" + gerbil.getNum() + " is hopping!");
+    public void hop(){
+        System.out.println("Gerbil " + gerbilNumber + " is hopping!");
     }
     
     /**
