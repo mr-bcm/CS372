@@ -5,6 +5,9 @@
  */
 package pr2_4;
 
+import java.util.List;
+import java.util.ArrayList;
+
 /**
  * Calculate the approximate value of PI.
  *
@@ -12,74 +15,43 @@ package pr2_4;
  */
 public class CalculatePI {
 
-    double curr = 0;
-    double numer = 4;   // Numerator
-    double denom = 1;   // Denominator
-
-    /**
-     * Calculate the approximate value of PI using Gregory-Leibniz series. The
-     * number of terms to calculate is based on the depth that is given to this
-     * function.
-     *
-     * @param depth the number of terms to calculate for
-     * @return
-     */
-    public double Calculate(int depth) {
-
-        for (int i = 0; i < depth; i++) {
-            curr += (numer / denom) - (numer / (denom + 2));
-            denom += 4;
-
-//            denom += 2; // increment the denominator by two each itteration
-//            if (sign == false) {
-//                curr -= (numer / denom);
-//                sign = true;
-//            } else if (sign == true) {
-//                curr += (numer / denom);
-//                sign = false;
-//            }
-        }
-        return curr;
-    }
-
     /**
      * Takes in the desired depth that PI will be calculated from and create a
      * table displaying the approximation of PI for each iteration.
      *
      * @param depth the number of terms to calculate for
      */
-    public void drawTable(int size) {
+    public List drawTable(int size) {
 
         int count = 0;
+        double curr = 0;
+        double numer = 4;   // Numerator
+        double denom = 1;   // Denominator
+        List list = new ArrayList();
 
-        System.out.println("---------------------------");
-        System.out.printf("| %d Iterations of PI |\n", size);
-        System.out.println("---------------------------");
-        
-        double current = 0;
-        double d = 1;
+        for (int i = 0; i < size; i++) {
 
-        for (int i = 0; i < 50; i++) {
+            curr += ((double) numer / (double) denom);
+            denom += (double) 2;
 
-            current += (4 / d);
-            d++;
-            d++;
+            list.add(curr);
 
-            current -= (4 / d);
+            curr -= ((double) numer / (double) denom);
+            denom += (double) 2;
 
-            System.out.printf("%7d: %1.8f", i, cat);
-            System.out.printf("  ");
+            list.add(curr);
 
-            count++;
-            if (count == 5) {
-                System.out.println();
-                count = 0;
-            }
+//            count++;
+//            if (count == 5) {
+//                System.out.println();
+//                count = 0;
+//            }
             //System.out.print(d);
         }
-        System.out.printf("Numer: %f\n", numer);
-        System.out.printf("Denom: %f\n", denom);
-        System.out.printf("Curr: %f\n", curr);
+        return list;
+//        System.out.printf("Numer: %f\n", numer);
+//        System.out.printf("Denom: %f\n", denom);
+//        System.out.printf("Curr: %f\n", curr);
 
     }
 }
