@@ -39,7 +39,7 @@ public class CalculatePI {
                 list.add(curr);
                 sign = true;
             }
-            denom += (double) 2;
+            denom += (double) 2;    // casting as a double is oddly important!!!
         }
         return list;
     }
