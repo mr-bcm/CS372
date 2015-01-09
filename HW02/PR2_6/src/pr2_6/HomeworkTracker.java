@@ -9,7 +9,8 @@ package pr2_6;
 import java.util.*;
 
 /**
- *
+ * Homework tracking application main class.
+ * 
  * @author Brennan
  */
 public class HomeworkTracker extends javax.swing.JFrame {
@@ -35,7 +36,7 @@ public class HomeworkTracker extends javax.swing.JFrame {
 
         lbtAssignments = new javax.swing.JLabel();
         lbtEnterScore = new javax.swing.JLabel();
-        lbCurrAssignment = new javax.swing.JLabel();
+        lbCurrHW = new javax.swing.JLabel();
         tfScore = new javax.swing.JTextField();
         btnSubmit = new javax.swing.JButton();
         lbtHWGrades = new javax.swing.JLabel();
@@ -54,9 +55,9 @@ public class HomeworkTracker extends javax.swing.JFrame {
         lbtEnterScore.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         lbtEnterScore.setText("Enter Score");
 
-        lbCurrAssignment.setFont(new java.awt.Font("Calibri", 0, 16)); // NOI18N
-        lbCurrAssignment.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lbCurrAssignment.setText("jLabel3");
+        lbCurrHW.setFont(new java.awt.Font("Calibri", 0, 16)); // NOI18N
+        lbCurrHW.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lbCurrHW.setText("Homework #1");
 
         tfScore.setFont(new java.awt.Font("Calibri", 0, 16)); // NOI18N
 
@@ -99,7 +100,7 @@ public class HomeworkTracker extends javax.swing.JFrame {
                 .addGap(39, 39, 39)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(lbtAssignments, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lbCurrAssignment, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(lbCurrHW, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(lbtEnterScore, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -120,11 +121,11 @@ public class HomeworkTracker extends javax.swing.JFrame {
                             .addComponent(lbAverage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(lbWorst, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(120, 120, 120)
-                        .addComponent(btnSubmit))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(94, 94, 94)
-                        .addComponent(lbtHWGrades)))
+                        .addComponent(lbtHWGrades))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(118, 118, 118)
+                        .addComponent(btnSubmit)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -134,13 +135,13 @@ public class HomeworkTracker extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbtAssignments)
                     .addComponent(lbtEnterScore))
-                .addGap(29, 29, 29)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tfScore, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbCurrAssignment))
-                .addGap(28, 28, 28)
+                .addGap(26, 26, 26)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbCurrHW)
+                    .addComponent(tfScore, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
                 .addComponent(btnSubmit)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+                .addGap(38, 38, 38)
                 .addComponent(lbtHWGrades)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -161,23 +162,25 @@ public class HomeworkTracker extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     /**
+     * When the Submit button is clicked the list of grades and grade display 
+     * (average, best, worst) is updated.
      * 
-     * @param evt 
+     * @param evt Submit button clicked
      */
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
-        // When button is clicked add HW assignment and value into a map for storage
+        String f = "Homework #" + ((int)grades.size() + 2);
+        lbCurrHW.setText(f);
+
         double c = Double.parseDouble(this.tfScore.getText());
         this.tfScore.setText("");
         grades.add(c);
 
         // Average Grade Display
-        String f = String.format("%1.2f", vr.getAverage(grades));
+        f = String.format("%1.2f", vr.getAverage(grades));
         lbAverage.setText(f);
-
         // Best Grade
         f = String.format("%1.2f", vr.getMax(grades));
         lbBest.setText(f);
-
         // Worst Grade
         f = String.format("%1.2f", vr.getMin(grades));
         lbWorst.setText(f);
@@ -222,7 +225,7 @@ public class HomeworkTracker extends javax.swing.JFrame {
     private javax.swing.JButton btnSubmit;
     private javax.swing.JLabel lbAverage;
     private javax.swing.JLabel lbBest;
-    private javax.swing.JLabel lbCurrAssignment;
+    private javax.swing.JLabel lbCurrHW;
     private javax.swing.JLabel lbWorst;
     private javax.swing.JLabel lbtAssignments;
     private javax.swing.JLabel lbtAverage;
