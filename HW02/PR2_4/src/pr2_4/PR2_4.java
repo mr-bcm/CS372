@@ -34,7 +34,7 @@ public class PR2_4 {
             
             System.out.printf("Calculating PI from a depth of %d\n", depth);
             System.out.printf("PI: ");
-            piValues = PI.calculate(depth);
+            piValues = PI.getAll(depth);
             
             int lastElement = piValues.size();
             System.out.printf("%1.8f", piValues.get(lastElement - 1));

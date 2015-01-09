@@ -16,13 +16,41 @@ import java.util.ArrayList;
 public class CalculatePI {
 
     /**
+     * Calculate will only output the approximation of PI based on the
+     * desired precision.
+     * @param size the number of series that PI is to be calculated for
+     * @return 
+     */
+    public double calculate(int size){
+        double curr = 0;
+        double numer = 4;   // Numerator
+        double denom = 1;   // Denominator
+        boolean sign = true;
+        List list = new ArrayList();
+
+        for (int i = 0; i < size; i++) {
+            if (sign == true) {
+                curr += (numer / denom);
+                list.add(curr);
+                sign = false;
+            } else if (sign == false) {
+                curr -= (numer / denom);
+                list.add(curr);
+                sign = true;
+            }
+            denom += (double) 2;    // casting as a double is oddly important!!!
+        }
+        return curr;
+    }
+    
+    /**
      * Takes in the desired depth that PI will be calculated from and returns a
      * list of doubles with every value of PI up to the desired depth.
      *
      * @param size the number of terms to calculate for
      * @return A List of double values for each iteration until the specified max (size) is reached
      */
-    public List calculate(int size) {
+    public List getAll(int size) {
         double curr = 0;
         double numer = 4;   // Numerator
         double denom = 1;   // Denominator
@@ -45,7 +73,7 @@ public class CalculatePI {
     }
 
     /**
-     * Calls the calculate function and outputs the results in a formatted
+     * Calls the getAll function and outputs the results in a formatted
      * table.
      *
      * @param size the number of computations (depth) that is to be calculated
@@ -53,7 +81,7 @@ public class CalculatePI {
      */
     public void drawTable(int size) {
         List piValues;
-        piValues = calculate(size);
+        piValues = getAll(size);
 
         System.out.println("--------------------------------");
         System.out.printf("  %7d Iterations of PI \n", size);

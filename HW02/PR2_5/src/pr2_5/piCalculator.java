@@ -1,8 +1,10 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * HW02-PR2_5: GUI PI
+ * By: Brennan Metzelaar
+ * Edited: 1/9/2015
+ * Due: 1/9/2015
  */
+
 package pr2_5;
 
 import pr2_4.CalculatePI;
