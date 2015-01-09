@@ -107,16 +107,13 @@ CalculatePI convert = new CalculatePI();
      * The applications convert button.
      * <p>
      * Takes in the users input from the textfield,
-     * the calculate function  from CalculatePI is called. Then the last value is
-     * taken from the array that calculate returns and output to the applications
-     * lbOutput label.
+     * the calculate function  from CalculatePI is called and calculated value
+     * is output to the applications lbOutput label.
      * @param evt 
      */
     private void btnConvertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConvertActionPerformed
         int c = Integer.parseInt(this.tfInput.getText());
-        List piValues = convert.calculate(c);
-        int last = piValues.size() - 1;
-        String f = String.format("%1.8f", piValues.get(last));
+        String f = String.format("%1.8f", convert.calculate(c));
         lbOutput.setText(f);
         
     }//GEN-LAST:event_btnConvertActionPerformed
