@@ -12,7 +12,7 @@ import java.lang.Math;
  */
 public class Circle {
 
-    static final double PI = 3.14;
+    static final double PI = 3.14; //PT: use java.lang.Math.PI
     double radius = 0;
     double area = 0;
     
