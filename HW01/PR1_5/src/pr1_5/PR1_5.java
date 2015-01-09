@@ -34,7 +34,7 @@ public class PR1_5 {
                 System.out.printf("a(%d) is greater than b(%d).\n", a, b);
             } else if (a < b) {
                 System.out.printf("a(%d) is less than b(%d).\n", a, b);
-            } else if (a == b) {
+            } else if (a == b) {  //PT: Why not just use else here, rather than else if?
                 System.out.printf("a(%d) and b(%d) are equal!\n", a, b);
             } else {
                 System.out.printf("Something went wrong!!!");
