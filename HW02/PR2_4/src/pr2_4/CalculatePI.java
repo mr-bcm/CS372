@@ -21,7 +21,7 @@ public class CalculatePI {
      *
      * @param depth the number of terms to calculate for
      */
-    public List drawTable(int size) {
+    public List calculate(int size) {
 
         int count = 0;
         double curr = 0;
@@ -54,4 +54,26 @@ public class CalculatePI {
 //        System.out.printf("Curr: %f\n", curr);
 
     }
+
+    public void drawTable(int size) {
+        List piValues;
+        piValues = calculate(size);
+
+        System.out.println("--------------------------------");
+        System.out.printf("  %7d Iterations of PI \n", size);
+        System.out.println("--------------------------------");
+
+        int count = 0;
+        for (int i = 0; i < piValues.size(); i++) {
+            System.out.printf("%7d: %1.8f", i + 1, piValues.get(i));
+            System.out.printf("    ");
+
+            count++;
+            if (count == 5) {
+                System.out.println();
+                count = 0;
+            }
+        }
+    }
+
 }
