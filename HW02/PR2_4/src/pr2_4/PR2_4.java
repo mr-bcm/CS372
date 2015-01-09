@@ -10,28 +10,39 @@ import java.util.List;
 import java.util.ArrayList;
 
 /**
- *
+ * Main class that calls the CalculatePI.
  * @author Brennan
  */
 public class PR2_4 {
 
     /**
-     * @param args the command line arguments
+     * Main calls PI functions to calculate the approximation of PI from 1 through
+     * 200,000 iterations of the Gregory-Leibniz series.
+     * 
+     * @param args command line argument that is used to specify the depth to which
+     * PI is to be approximated to
      */
     public static void main(String[] args) {
-        int depth = Integer.parseInt(args[0]);
-
+        int depth; 
         List piValues;
         CalculatePI PI = new CalculatePI();
 
-         System.out.printf("Calculating PI from a depth of %d\n", depth);
-         System.out.printf("PI: ");
-         System.out.println(PI.calculate(depth));
-         System.out.println();
-         
-         PI.drawTable(6);
-        
+        if (args.length == 0) {
+            // leave if statement
+        } else if (args.length > 0) {
+            depth = Integer.parseInt(args[0]);
+            
+            System.out.printf("Calculating PI from a depth of %d\n", depth);
+            System.out.printf("PI: ");
+            piValues = PI.calculate(depth);
+            
+            int lastElement = piValues.size();
+            System.out.printf("%1.8f", piValues.get(lastElement - 1));
+        }
 
+        System.out.println();
+
+        PI.drawTable(200000);   // calculate X values of PI and output a formatted table
     }
 
 }

@@ -16,45 +16,41 @@ import java.util.ArrayList;
 public class CalculatePI {
 
     /**
-     * Takes in the desired depth that PI will be calculated from and create a
-     * table displaying the approximation of PI for each iteration.
+     * Takes in the desired depth that PI will be calculated from and returns a
+     * list of doubles with every value of PI up to the desired depth.
      *
-     * @param depth the number of terms to calculate for
+     * @param size the number of terms to calculate for
+     * @return A List of double values for each iteration until the specified max (size) is reached
      */
     public List calculate(int size) {
-
-        int count = 0;
         double curr = 0;
         double numer = 4;   // Numerator
         double denom = 1;   // Denominator
+        boolean sign = true;
         List list = new ArrayList();
 
         for (int i = 0; i < size; i++) {
-
-            curr += ((double) numer / (double) denom);
+            if (sign == true) {
+                curr += (numer / denom);
+                list.add(curr);
+                sign = false;
+            } else if (sign == false) {
+                curr -= (numer / denom);
+                list.add(curr);
+                sign = true;
+            }
             denom += (double) 2;
-
-            list.add(curr);
-
-            curr -= ((double) numer / (double) denom);
-            denom += (double) 2;
-
-            list.add(curr);
-
-//            count++;
-//            if (count == 5) {
-//                System.out.println();
-//                count = 0;
-//            }
-            //System.out.print(d);
         }
         return list;
-//        System.out.printf("Numer: %f\n", numer);
-//        System.out.printf("Denom: %f\n", denom);
-//        System.out.printf("Curr: %f\n", curr);
-
     }
 
+    /**
+     * Calls the calculate function and outputs the results in a formatted
+     * table.
+     *
+     * @param size the number of computations (depth) that is to be calculated
+     * for PI
+     */
     public void drawTable(int size) {
         List piValues;
         piValues = calculate(size);
