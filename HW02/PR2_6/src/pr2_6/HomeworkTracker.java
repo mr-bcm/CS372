@@ -1,9 +1,11 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * HW02-PR2_6: Homework Tracker
+ * By: Brennan Metzelaar
+ * Edited: 1/9/2015
+ * Due: 1/9/2015
  */
 package pr2_6;
+
 import java.util.*;
 
 /**
@@ -11,12 +13,10 @@ import java.util.*;
  * @author Brennan
  */
 public class HomeworkTracker extends javax.swing.JFrame {
-    HashMap hm = new HashMap();
-    hm.put("Zara", new Double(3.5));
-    String hw = "Homework %d";
-    
-    //lbCurrAssignment
-    
+
+    List grades = new ArrayList();
+    ValueRange vr = new ValueRange();
+
     /**
      * Creates new form HomeworkTracker
      */
@@ -83,13 +83,13 @@ public class HomeworkTracker extends javax.swing.JFrame {
         lbtAverage.setText("Average");
 
         lbBest.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
-        lbBest.setText("------------");
+        lbBest.setText("----");
 
         lbWorst.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
-        lbWorst.setText("------------");
+        lbWorst.setText("----");
 
         lbAverage.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
-        lbAverage.setText("------------");
+        lbAverage.setText("----");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -109,25 +109,22 @@ public class HomeworkTracker extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(80, 80, 80)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(lbtAverage)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(lbtWorst, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(lbtBest, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(55, 55, 55)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(lbBest, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(lbAverage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(lbWorst, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(lbtHWGrades)
-                                .addGap(18, 18, 18))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lbtAverage)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(lbtWorst, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(lbtBest, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(55, 55, 55)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lbBest, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lbAverage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lbWorst, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(120, 120, 120)
-                        .addComponent(btnSubmit)))
+                        .addComponent(btnSubmit))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(94, 94, 94)
+                        .addComponent(lbtHWGrades)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -163,9 +160,27 @@ public class HomeworkTracker extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * 
+     * @param evt 
+     */
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
         // When button is clicked add HW assignment and value into a map for storage
-        
+        double c = Double.parseDouble(this.tfScore.getText());
+        this.tfScore.setText("");
+        grades.add(c);
+
+        // Average Grade Display
+        String f = String.format("%1.2f", vr.getAverage(grades));
+        lbAverage.setText(f);
+
+        // Best Grade
+        f = String.format("%1.2f", vr.getMax(grades));
+        lbBest.setText(f);
+
+        // Worst Grade
+        f = String.format("%1.2f", vr.getMin(grades));
+        lbWorst.setText(f);
     }//GEN-LAST:event_btnSubmitActionPerformed
 
     /**
