@@ -10,6 +10,8 @@ package pr2_7;
  *
  * @author bmetzelaar16
  */
-public interface InventoryManager {
-    
+public interface Product {
+    public void setName();
+    public void setPrice();
+    public void setSold();
 }
