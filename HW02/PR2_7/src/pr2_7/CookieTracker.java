@@ -78,13 +78,13 @@ public class CookieTracker extends javax.swing.JFrame {
         ltProfit.setText("Profit");
 
         lMintProfit.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
-        lMintProfit.setText("------");
+        lMintProfit.setText("$0.00");
 
         lSamProfit.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
-        lSamProfit.setText("------");
+        lSamProfit.setText("$0.00");
 
         lChoChipProfit.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
-        lChoChipProfit.setText("------");
+        lChoChipProfit.setText("$0.00");
 
         jLabel2.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         jLabel2.setText("Total:");
@@ -98,7 +98,7 @@ public class CookieTracker extends javax.swing.JFrame {
         });
 
         lTotalProfit.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
-        lTotalProfit.setText("------");
+        lTotalProfit.setText("$0.00");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -132,17 +132,19 @@ public class CookieTracker extends javax.swing.JFrame {
                                             .addComponent(tfMintsSold, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(tfChocChipSold, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lTotalProfit, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(lTotalProfit, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(10, 10, 10))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(116, 116, 116)
                         .addComponent(jLabel1)
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(ltProfit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lMintProfit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lSamProfit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lChoChipProfit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addGap(42, 42, 42))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(lMintProfit, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+                                .addComponent(lSamProfit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(lChoChipProfit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(ltProfit, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(32, 32, 32))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -182,22 +184,25 @@ public class CookieTracker extends javax.swing.JFrame {
 
     private void btnCalculateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalculateActionPerformed
         
-        int d = Integer.parseInt(this.tfMintsSold.getText());
-        String f = String.format("%.2f", (double)mint.profit(d));
-        lMintProfit.setText(f);
+        int a = Integer.parseInt(this.tfMintsSold.getText());
+        String sMint = String.format("$%.2f", (double)mint.profit(a));
         
-        d = Integer.parseInt(this.tfSamSold.getText());
-        f = String.format("%.2f", (double)sam.profit(d));
-        lSamProfit.setText(f);
+        // lMintProfit.getText().equals("");
+        lMintProfit.setText(sMint);
         
-        d = Integer.parseInt(this.tfChocChipSold.getText());
-        f = String.format("%.2f", (double)chip.profit(d));
-        lChoChipProfit.setText(f);
+        int b = Integer.parseInt(this.tfSamSold.getText());
+        String sSam = String.format("$%.2f", (double)sam.profit(b));
+        lSamProfit.setText(sSam);
+        
+        int c = Integer.parseInt(this.tfChocChipSold.getText());
+        String sChip = String.format("$%.2f", (double)chip.profit(c));
+        lChoChipProfit.setText(sChip);
 
         double total;
-        total = (double)mint.profit(d) + (double)sam.profit(d) + (double)chip.profit(d);
-        f = String.format("%.2f", total);
-        lTotalProfit.setText(f);
+        total = (double)mint.profit(a) + (double)sam.profit(b) + (double)chip.profit(c);
+        String sTotal = String.format("$%.2f", total);
+        lTotalProfit.setText(sTotal);
+        
 
     }//GEN-LAST:event_btnCalculateActionPerformed
 
