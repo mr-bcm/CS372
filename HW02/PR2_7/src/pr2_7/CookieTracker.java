@@ -6,11 +6,13 @@
 package pr2_7;
 
 /**
- *
+ * MAIN CLASS - program calculates the total amount of money each type
+ * of cookie has made along with to total amount of money all of the cookies
+ * brought in.
+ * 
  * @author bmetzelaar16
  */
 public class CookieTracker extends javax.swing.JFrame {
-
     CalcProduct mint = new CalcProduct("Thin Mints", 3);
     CalcProduct sam = new CalcProduct("Samoas", 4);
     CalcProduct chip = new CalcProduct("Chocolate Chip", 5);
@@ -182,28 +184,48 @@ public class CookieTracker extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * When "Calculate" button is pressed the values entered are used to calculate
+     * the sales that each type of cookie has made along with the total sales from all cookies sold.
+     * 
+     * @param evt button click
+     */
     private void btnCalculateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalculateActionPerformed
-        
-        int a = Integer.parseInt(this.tfMintsSold.getText());
+        // For Thin Mints
+        int a = 0; 
+        if (tfMintsSold.getText().equals("")){
+            a = 0;
+        } else {
+            a = Integer.parseInt(this.tfMintsSold.getText());
+        }
         String sMint = String.format("$%.2f", (double)mint.profit(a));
-        
-        // lMintProfit.getText().equals("");
         lMintProfit.setText(sMint);
         
-        int b = Integer.parseInt(this.tfSamSold.getText());
+        // For Samoas
+        int b = 0;
+        if (tfSamSold.getText().equals("")){
+            b = 0;
+        } else {
+            b = Integer.parseInt(this.tfSamSold.getText());
+        }
         String sSam = String.format("$%.2f", (double)sam.profit(b));
         lSamProfit.setText(sSam);
         
-        int c = Integer.parseInt(this.tfChocChipSold.getText());
+        // For Chocolate Chips
+        int c = 0;
+        if (tfChocChipSold.getText().equals("")){
+            c = 0;
+        } else {
+            c = Integer.parseInt(this.tfChocChipSold.getText());
+        }
         String sChip = String.format("$%.2f", (double)chip.profit(c));
         lChoChipProfit.setText(sChip);
 
+        // For total of all cookies
         double total;
         total = (double)mint.profit(a) + (double)sam.profit(b) + (double)chip.profit(c);
         String sTotal = String.format("$%.2f", total);
         lTotalProfit.setText(sTotal);
-        
-
     }//GEN-LAST:event_btnCalculateActionPerformed
 
     /**
