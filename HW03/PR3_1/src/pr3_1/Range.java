@@ -16,7 +16,7 @@ import java.util.*;
  * @author Brennan
  */
 public class Range {
-
+    
     /**
      * Returns the smallest double value that was found within a given List.
      * 
@@ -116,4 +116,22 @@ public class Range {
         }
         return sum / (int) l.size();
     }
+    
+    
+    
+// GENERIC TYPE
+    
+//    public T getMin(List<T> l) {
+//        // T min = Double.MAX_VALUE;
+//
+//        T min = l.get(0);
+//        
+//        for (int i = 0; i < l.size(); i++) {
+//            if (min > l.get(i)) {
+//                min = (T) l.get(i);
+//            }
+//        }
+//        return min;
+//    }
+    
 }
