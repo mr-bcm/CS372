@@ -24,7 +24,6 @@ public class PR3_1 {
      */
     public static void main(String[] args) {
         List l = new ArrayList();
-        // int[] arr = new int[10];
         Range vr = new Range();
 
         System.out.println("Enter 10 numbers:");
@@ -39,14 +38,10 @@ public class PR3_1 {
             System.out.println("ERROR: You can only enter integers");
         }
         
-        try {
             System.out.println();
             System.out.println("From the numbers that were entered");
             System.out.printf("The largest number is %d\n", (int) vr.getMaxInt(l));
             System.out.printf("The smallest number is %d\n", (int) vr.getMinInt(l));
             System.out.printf("The average of the numbers is %d\n", (int) vr.getAverageInt(l));
-        } catch (ArithmeticException e) {
-            System.out.println("ERROR: A non integer value got though");
-        }
     }
 }
