@@ -5,14 +5,13 @@
  */
 package Shapes;
 
-import java.io.*;
-
 /**
- * Triangle is a shape object that consists of three sides, an area, and a perimeter.
+ * Triangle is a shape object that consists of three sides, an area, and a
+ * perimeter.
+ *
  * @author bmetzelaar16
  */
 public class Triangle {
-
     int s1, s2, s3;
 
     /**
@@ -40,8 +39,14 @@ public class Triangle {
         }
     }
 
+    /**
+     * Calculate area of a triangle using all three sides and Heron's formula.
+     * @return area of triangle
+     */
     public double getArea() {
-        return 0;
+        double p = getPerimeter() / 2.0;
+        
+        return Math.sqrt((p * (p - s1) * (p - s2) * (p - s3)));
     }
 
     /**
@@ -52,7 +57,7 @@ public class Triangle {
     public double getPerimeter() {
         return s1 + s2 + s3;
     }
-    
+
     @Override
     public String toString() {
         return "Triangle\n";
@@ -63,8 +68,8 @@ public class Triangle {
         if (o.getClass() != Triangle.class) {
             return false;
         }
-        
-        Triangle t = (Triangle)o;
+
+        Triangle t = (Triangle) o;
         return ((t.s1 == this.s1) && (t.s2 == this.s2) && (t.s3 == this.s3));
     }
 

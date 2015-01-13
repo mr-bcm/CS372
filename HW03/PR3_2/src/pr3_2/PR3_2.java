@@ -22,11 +22,13 @@ public class PR3_2 {
      */
     public static void main(String[] args) {
         try {
-            Rectangle rectangle = new Rectangle(2, 4);
-            Triangle triangle = new Triangle(3, 4, 5);
-            Ellipse ellipse = new Ellipse(5, 8);
+            Rectangle rec1 = new Rectangle(2, 4);
+            Rectangle rec2 = new Rectangle(1, 4);
+            Triangle triangle = new Triangle(3, 6, 5);
+            Ellipse ellipse = new Ellipse(5, 4);
 
-            System.out.printf("Rectangle: area = %.2f, perimeter = %.2f\n", rectangle.getArea(), rectangle.getPerimeter());
+            System.out.printf("Are rectangles 1 and 2 the same? ->  %b\n", rec1.equals(rec2));
+            System.out.printf("Rectangle 1: area = %.2f, perimeter = %.2f\n", rec1.getArea(), rec1.getPerimeter());
             System.out.printf("Triangle: area = %.2f, perimeter = %.2f\n", triangle.getArea(), triangle.getPerimeter());
             System.out.printf("Ellipse: area = %.2f, perimeter = %.2f\n", ellipse.getArea(), ellipse.getPerimeter());
         } catch (Exception e) {
