@@ -7,7 +7,8 @@
 package Shapes;
 
 /**
- *
+ * Defines the minimum of what all shape objects should include 
+ * (area, perimeter, etc). 
  * @author bmetzelaar16
  */
 public class Shape {
