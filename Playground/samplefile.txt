@@ -1,0 +1,3 @@
+<name>Student Symposium<1done><location>Weyerhaeuser Hall 107<2done><date>1/14/2015<3done>
+<name>The State of Civil Rights Education in the U.S.<1done><location>Weyerhaeuser Hall 107<2done><date>1/20/2015<3done>
+<name>Opening Convocation/Founder's Day Celebration<1done><location>Cowles Auditorium Main Stage(convocation), Dixon Hall 2nd floor(faculty line up)<2done><date>2/5/2015<3done>
