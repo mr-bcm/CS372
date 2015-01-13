@@ -4,134 +4,95 @@
  * and open the template in the editor.
  */
 package pr3_1;
+
 import java.util.*;
 
 /**
  * Contains methods for calculating the minimum, maximum, and average values
  * within a List.
- * <p> There are two sets of methods, the default is for double values (getMin) 
- * and the methods with Int in the name are for getting integer values 
- * (getMinInt).
- * 
+ * <p>
+ * There are two sets of methods, the default is for double values (getMin) and
+ * the methods with Int in the name are for getting integer values (getMinInt).
+ *
  * @author Brennan
  */
 public class Range {
-    
+
     /**
-     * Returns the smallest double value that was found within a given List.
-     * 
-     * @param l represents a list that contains double variables
-     * @return returns the minimum double value that appeared in the List
+     * Returns the smallest value that was found within a given List.
+     *
+     * @param l represents a list that contains variables
+     * @return returns the minimum value that appeared in the List
      */
-    public double getMin(List l) {
-        double min = Double.MAX_VALUE;
+    public <T extends Comparable> T getMin(List<T> l) {
+        if (l.size() == 0) {
+            throw new IllegalArgumentException();
+        }
+        T min = l.get(0);
 
         for (int i = 0; i < l.size(); i++) {
-            if (min > (double) l.get(i)) {
-                min = (double) l.get(i);
+            int j = min.compareTo(l.get(i));
+            if (j == 1) {
+                min = l.get(i);
             }
         }
         return min;
     }
 
     /**
-     * Returns the largest double value that was found within a given List.
-     * 
-     * @param l represents a list that contains double variables
-     * @return returns the maximum double value that appeared in the List
+     * Returns the largest value within the given List.
+     *
+     * @param l represents a list of variables
+     * @return returns the maximum variable value found in the list
      */
-    public double getMax(List l) {
-        double max = Double.MIN_VALUE;
-        
-        for (int i = 0; i < l.size(); i++){
-            if (max < (double) l.get(i)){
-                max = (double) l.get(i);
+    public <T extends Comparable> T getMax(List<T> l) {
+        if (l.size() == 0) {
+            throw new IllegalArgumentException();
+        }
+        T max = l.get(l.size() - 1);
+
+        for (int i = 0; i < l.size(); i++) {
+            int j = max.compareTo(l.get(i));
+            if (j == -1) {
+                max = l.get(i);
             }
         }
         return max;
     }
 
-    /**
-     * Returns the average double value that was found within a given List.
-     * 
-     * @param l represents a list that contains double variables
-     * @return returns the average double value that appeared in the List
-     */
-    public double getAverage(List l) {
-        double sum = 0;
-
-        for (int i = 0; i < l.size(); i++) {
-            sum += (double) l.get(i);
-        }
-        return sum / (double) l.size();
-    }
-
-    // BELOW IS FOR INTEGER VALUES
-    
-    /**
-     * Returns the smallest integer value that was found within a given List.
-     * 
-     * @param l represents a list that contains integer variables
-     * @return returns the minimum integer value that appeared in the List
-     */
-    public int getMinInt(List l) {
-        int min = Integer.MAX_VALUE;
-
-        for (int i = 0; i < l.size(); i++) {
-            if (min > (int)l.get(i)) {
-                min = (int)l.get(i);
-            }
-        }
-        return min;
-    }
-
-    /**
-     * Returns the largest integer value that was found within a given List.
-     * 
-     * @param l represents a list that contains integer variables
-     * @return returns the maximum integer value that appeared in the List
-     */
-    public int getMaxInt(List l) {
-        int max = Integer.MIN_VALUE;
-        
-        for (int i = 0; i < l.size(); i++){
-            if (max < (int) l.get(i)){
-                max = (int) l.get(i);
-            }
-        }
-        return max;
-    }
-
-    /**
-     * Returns the average integer value that was found within a given List.
-     * 
-     * @param l represents a list that contains integer variables
-     * @return returns the average integer value that appeared in the List
-     */
-    public int getAverageInt(List l) {
-        int sum = 0;
-
-        for (int i = 0; i < l.size(); i++) {
-            sum += (int) l.get(i);
-        }
-        return sum / (int) l.size();
-    }
-    
-    
-    
-// GENERIC TYPE
-    
-//    public T getMin(List<T> l) {
-//        // T min = Double.MAX_VALUE;
+//    /**
+//     * Returns the average value that was found within the given List.
+//     * 
+//     * @param l represents a list of variables
+//     * @return returns the average integer value found in the list
+//     */
+//    public int getAverage(List l) {
+//        int sum = 0;
 //
-//        T min = l.get(0);
-//        
 //        for (int i = 0; i < l.size(); i++) {
-//            if (min > l.get(i)) {
-//                min = (T) l.get(i);
-//            }
+//            sum += (int) l.get(i);
 //        }
-//        return min;
+//        return sum / (int) l.size();
 //    }
-    
+    public <T> T getAverage(List<T> l) throws Exception{
+        // Get average of integers
+        if (l.get(0) instanceof Integer) {
+            int sum = 0;
+            for (int i = 0; i < l.size(); i++) {
+                sum += (Integer) l.get(i);
+            }
+            return (T) ((Integer) (sum / l.size()));
+
+        // Get average of doubles
+        } else if (l.get(0) instanceof Double) {
+            double sum = 0;
+            for (int i = 0; i < l.size(); i++) {
+                sum += (Double) l.get(i);
+            }
+            return (T) ((Double) (sum / l.size()));
+        }
+        
+        throw new Exception ("Type is not supported\n");
+    }
+
 }
