@@ -28,24 +28,20 @@ public class PR3_1 {
 
         System.out.println("Enter 10 numbers:");
         Scanner input = new Scanner(System.in);
-        
+
         try {
             for (int i = 0; i < 10; i++) {
                 l.add(input.nextInt());
             }
-            System.out.println();
-            System.out.println("From the numbers that were entered");
-            System.out.printf("The largest number is %d\n", vr.getMax(l));
-            System.out.printf("The smallest number is %d\n", vr.getMin(l));
-            System.out.printf("The average of the numbers is %d\n", vr.getAverage(l));
-            
         } catch (InputMismatchException e) {
             // System.out.println(e.getMessage());
             System.out.println("ERROR: You can only enter integers");
-        } catch (Exception e){
-            
         }
-        
-            
+
+        System.out.println();
+        System.out.println("From the numbers that were entered");
+        System.out.printf("The largest number is %d\n", vr.getMax(l));
+        System.out.printf("The smallest number is %d\n", vr.getMin(l));
+        System.out.printf("The average of the numbers is %d\n", vr.getAverageInt(l));
     }
 }
