@@ -14,6 +14,8 @@ import java.util.*;
  * @author Brennan
  */
 public class ValueRange {
+    //PT -- since ValueRange doesn't have any member variables, the methods
+    //      could all be static, making your code more flexible.
 
     /**
      * Returns the smallest value that was found within a given List.

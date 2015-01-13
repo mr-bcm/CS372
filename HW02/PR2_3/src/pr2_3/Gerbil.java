@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package pr2_3;
-
+//PT -- Use the gerbil class in pr2_1. -2
 /**
  * A gerbil is assigned a number and has various functions, such as being able to hop.
  * @author Brennan

@@ -30,6 +30,7 @@ public class PR2_1 {
 
         System.out.println("Watch the gerbils hop!");
 
+        //PT -- loop here?
         manyGerbils.add(new Gerbil(1));
         manyGerbils.add(new Gerbil(2));
         manyGerbils.add(new Gerbil(3));

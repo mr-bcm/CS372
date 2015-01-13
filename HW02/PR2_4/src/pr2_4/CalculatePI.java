@@ -29,6 +29,7 @@ public class CalculatePI {
         List list = new ArrayList();
 
         for (int i = 0; i < size; i++) {
+            //PT -- as we talked about in class, you can reduce this if/else
             if (sign == true) {
                 curr += (numer / denom);
                 list.add(curr);

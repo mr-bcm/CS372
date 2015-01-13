@@ -6,6 +6,7 @@
  */
 
 package pr2_2;
+//PT -- import Gerbil from pr2_1 instead, to reuse that code. -2
 import pr2_2.Gerbil;
 import java.util.*; // used for ArrayList
 

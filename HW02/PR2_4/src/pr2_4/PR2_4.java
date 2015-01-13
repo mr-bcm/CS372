@@ -29,6 +29,7 @@ public class PR2_4 {
 
         if (args.length == 0) {
             // leave if statement
+            //PT -- why? It's not doing anything here
         } else if (args.length > 0) {
             depth = Integer.parseInt(args[0]);
             
