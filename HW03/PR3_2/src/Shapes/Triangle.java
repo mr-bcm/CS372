@@ -8,18 +8,20 @@ package Shapes;
 import java.io.*;
 
 /**
- *
+ * Triangle is a shape object that consists of three sides, an area, and a perimeter.
  * @author bmetzelaar16
  */
 public class Triangle {
+
     int s1, s2, s3;
 
     /**
      * Initialize the sides of a triangle.
+     *
      * @param s1 triangle side 1
      * @param s2 triangle side 2
      * @param s3 triangle side 3
-     * @throws Exception triangle side is initialized as 0 or negative, or the 
+     * @throws Exception triangle side is initialized as 0 or negative, or the
      * triangle fails to pass the inequality theorem.
      */
     public Triangle(int s1, int s2, int s3) throws Exception {
@@ -44,15 +46,26 @@ public class Triangle {
 
     /**
      * Calculate the perimeter of the triangle using sides 1, 2, and 3.
+     *
      * @return triangle perimeter
      */
     public double getPerimeter() {
         return s1 + s2 + s3;
     }
-
+    
     @Override
     public String toString() {
         return "Triangle\n";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o.getClass() != Triangle.class) {
+            return false;
+        }
+        
+        Triangle t = (Triangle)o;
+        return ((t.s1 == this.s1) && (t.s2 == this.s2) && (t.s3 == this.s3));
     }
 
 }

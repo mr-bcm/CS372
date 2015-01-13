@@ -6,7 +6,7 @@
 package Shapes;
 
 /**
- * 
+ * Ellipse is a shape object that consists of two radii, an area, and a perimeter.
  * 
  * @author bmetzelaar16
  */
@@ -48,5 +48,15 @@ public class Ellipse extends Shape {
     @Override
     public String toString() {
         return "Ellipse\n";
+    }
+    
+    @Override
+    public boolean equals(Object o){
+        if (o.getClass() != Ellipse.class){
+            return false;
+        }
+        
+        Ellipse e = (Ellipse)o;
+        return ((e.r1 == this.r1) && (e.r2 == this.r2));
     }
 }

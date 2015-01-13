@@ -22,7 +22,7 @@ public class PR3_2 {
      */
     public static void main(String[] args) {
         try {
-            Rectangle rectangle = new Rectangle(2, 8);
+            Rectangle rectangle = new Rectangle(2, 4);
             Triangle triangle = new Triangle(3, 4, 5);
             Ellipse ellipse = new Ellipse(5, 8);
 
