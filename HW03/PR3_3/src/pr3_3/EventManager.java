@@ -41,17 +41,46 @@ public class EventManager extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        lbEventName.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        lbEventName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbEventName.setText("Event Name");
 
+        lbLocation.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        lbLocation.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbLocation.setText("Location");
 
+        lbMonth.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        lbMonth.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbMonth.setText("Month");
 
+        lbDay.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        lbDay.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbDay.setText("Day");
 
+        lbYear.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        lbYear.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbYear.setText("Year");
 
+        txtEventName.setFont(new java.awt.Font("Calibri", 0, 11)); // NOI18N
+
+        txtLocation.setFont(new java.awt.Font("Calibri", 0, 11)); // NOI18N
+
+        btnAddEvent.setFont(new java.awt.Font("Calibri", 0, 11)); // NOI18N
         btnAddEvent.setText("Add Event");
+        btnAddEvent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddEventActionPerformed(evt);
+            }
+        });
+
+        txtMonth.setFont(new java.awt.Font("Calibri", 0, 11)); // NOI18N
+        txtMonth.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
+        txtDay.setFont(new java.awt.Font("Calibri", 0, 11)); // NOI18N
+        txtDay.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
+        txtYear.setFont(new java.awt.Font("Calibri", 0, 11)); // NOI18N
+        txtYear.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -59,31 +88,26 @@ public class EventManager extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(29, 29, 29)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtEventName, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addComponent(lbEventName)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtEventName, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                    .addComponent(lbEventName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(txtLocation, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(lbLocation)
-                        .addGap(102, 102, 102)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtLocation, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                    .addComponent(lbLocation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(lbMonth, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtMonth, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtMonth))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lbDay, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                    .addComponent(lbDay, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
                     .addComponent(txtDay))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lbYear, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                    .addComponent(lbYear, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
                     .addComponent(txtYear))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addComponent(btnAddEvent)
                 .addGap(29, 29, 29))
         );
@@ -106,11 +130,25 @@ public class EventManager extends javax.swing.JFrame {
                         .addComponent(txtMonth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(txtDay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(txtYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(218, Short.MAX_VALUE))
+                .addContainerGap(215, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnAddEventActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddEventActionPerformed
+        int month = Integer.parseInt(this.txtMonth.getText());
+        int day = Integer.parseInt(this.txtDay.getText());
+        int year = Integer.parseInt(this.txtYear.getText());
+        Event event = new Event(txtEventName.getText(), txtLocation.getText(), month, day, year);
+        
+        txtEventName.setText("");
+        txtLocation.setText("");
+        txtMonth.setText("");
+        txtDay.setText("");
+        txtYear.setText("");
+        
+    }//GEN-LAST:event_btnAddEventActionPerformed
 
     /**
      * @param args the command line arguments
