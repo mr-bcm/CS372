@@ -29,6 +29,7 @@ public class EventManager extends javax.swing.JFrame {
     }
     
     public void readFromFile(){
+        // TODO: Create string array, this will hold the event name, location, and date
         File f = new File("C:\\Users\\Brennan\\Documents\\GitHub\\CS372\\HW03\\PR3_3\\src\\pr3_3\\ioWriter.txt");
 
         try{
@@ -39,6 +40,7 @@ public class EventManager extends javax.swing.JFrame {
                 Matcher m = p.matcher(line);
                 while(m.find()){
                     System.out.println(m.group(1));
+                    // TODO: Event info array = m.group(1) data
                 }
                 
                 Pattern p2 = Pattern.compile("<location\\>(.*)?\\<2done>");
