@@ -6,14 +6,15 @@
 package pr3_3;
 
 import java.io.*;   // method saveFile() needs java.io.BufferedWriter
+import java.util.regex.*;   // reading from file and retrieving proper info
 
 /**
  *
  * @author Brennan
  */
 public class EventManager extends javax.swing.JFrame {
-    // List list = new ArrayList();
-
+    
+    
     public void writeToFile(String e) {
         File f = new File("C:\\Users\\Brennan\\Documents\\GitHub\\CS372\\HW03\\PR3_3\\src\\pr3_3\\ioWriter.txt");
         try {
@@ -24,6 +25,39 @@ public class EventManager extends javax.swing.JFrame {
         } catch (Exception ex) {
             System.out.print("ERROR: ");
             System.out.println(ex.getMessage());
+        }
+    }
+    
+    public void readFromFile(){
+        File f = new File("C:\\Users\\Brennan\\Documents\\GitHub\\CS372\\HW03\\PR3_3\\src\\pr3_3\\ioWriter.txt");
+
+        try{
+            BufferedReader rdr = new BufferedReader(new FileReader(f));
+            String line;
+            while ((line = rdr.readLine()) != null){
+                Pattern p = Pattern.compile("<name\\>(.*)?\\<1done>");
+                Matcher m = p.matcher(line);
+                while(m.find()){
+                    System.out.println(m.group(1));
+                }
+                
+                Pattern p2 = Pattern.compile("<location\\>(.*)?\\<2done>");
+                Matcher m2 = p2.matcher(line);
+                while(m2.find()){
+                    System.out.println(m2.group(1));
+                }
+                
+                Pattern p3 = Pattern.compile("<date\\>(.*)?\\<3done>");
+                Matcher m3 = p3.matcher(line);
+                while(m3.find()){
+                    System.out.println(m3.group(1));
+                }
+            }
+                System.out.println(line);
+            rdr.close();
+        } catch (Exception e){
+            System.out.print("Error: ");
+            System.out.println(e.getMessage());
         }
     }
 
