@@ -23,4 +23,16 @@ public class Event {
         this.day = day;
         this.year = year;
     }
+    
+    public String outputEvent(){
+        return name + " " + location + " " + month + "/" + day + "/" + year;
+    }
+    
+    public String outputEventPattern(){
+        String tName = "<name>" + name + "<1done>";
+        String tLoc = "<location>" + location + "<2done>";
+        String tDate = "<date>" + month + "/" + day + "/" + year + "<3done>";
+
+        return tName + tLoc + tDate;
+    }
 }

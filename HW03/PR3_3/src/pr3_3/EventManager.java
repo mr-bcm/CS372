@@ -5,11 +5,27 @@
  */
 package pr3_3;
 
+import java.io.*;   // method saveFile() needs java.io.BufferedWriter
+
 /**
  *
  * @author Brennan
  */
 public class EventManager extends javax.swing.JFrame {
+    // List list = new ArrayList();
+
+    public void writeToFile(String e) {
+        File f = new File("C:\\Users\\Brennan\\Documents\\GitHub\\CS372\\HW03\\PR3_3\\src\\pr3_3\\ioWriter.txt");
+        try {
+            BufferedWriter wrtr = new BufferedWriter(new FileWriter(f, true));
+            wrtr.write(e);
+            wrtr.newLine();
+            wrtr.close();
+        } catch (Exception ex) {
+            System.out.print("ERROR: ");
+            System.out.println(ex.getMessage());
+        }
+    }
 
     /**
      * Creates new form EventManager
@@ -141,13 +157,14 @@ public class EventManager extends javax.swing.JFrame {
         int day = Integer.parseInt(this.txtDay.getText());
         int year = Integer.parseInt(this.txtYear.getText());
         Event event = new Event(txtEventName.getText(), txtLocation.getText(), month, day, year);
-        
+
         txtEventName.setText("");
         txtLocation.setText("");
         txtMonth.setText("");
         txtDay.setText("");
         txtYear.setText("");
-        
+
+        writeToFile(event.outputEventPattern());  // attempt to write event to a file
     }//GEN-LAST:event_btnAddEventActionPerformed
 
     /**
