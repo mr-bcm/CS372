@@ -8,7 +8,7 @@ package exam1;
 import java.util.Random;
 
 /**
- *
+ * 
  * @author bmetzelaar16
  */
 public class Dice {

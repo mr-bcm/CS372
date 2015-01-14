@@ -14,10 +14,10 @@ import javax.swing.JComboBox;
  * @author bmetzelaar16
  */
 public class UnderOver extends javax.swing.JFrame {
-    List<String> storedUsers = new ArrayList<String>();
-    int choice = 0; // combobox choice
-    Double userMoney = 0.0;
 
+    List<String> storedUsers = new ArrayList<String>();
+    int choice = 1; // combobox choice
+    Double userMoney = 0.0;
 
     public void readFile(List<String> storedUsers) {
         // List<String> users = new ArrayList<String>();
@@ -30,7 +30,7 @@ public class UnderOver extends javax.swing.JFrame {
                 storedUsers.add(line);
             }
             rdr.close();
-            
+
             // do something with the list of users
         } catch (Exception ex) {
             System.out.print("ERROR:");
@@ -42,15 +42,13 @@ public class UnderOver extends javax.swing.JFrame {
     public void writeFile() {
 
     }
-    
+
     /**
      * Creates new form UnderOver
      */
     public UnderOver() {
         initComponents();
     }
-    
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -68,26 +66,26 @@ public class UnderOver extends javax.swing.JFrame {
         lbWelcome = new javax.swing.JLabel();
         lbMoney = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        tfUnder7 = new javax.swing.JTextField();
-        tfOver7 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         lbResults = new javax.swing.JLabel();
         lbDiceRoll1 = new javax.swing.JLabel();
         lbDiceRoll2 = new javax.swing.JLabel();
         lbRollPayout = new javax.swing.JLabel();
-        tfExactly7 = new javax.swing.JTextField();
         jComboBox1 = new javax.swing.JComboBox();
         tfBet = new javax.swing.JTextField();
+        lbAmount = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jLabel1.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         jLabel1.setText("Login");
 
+        jLabel2.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         jLabel2.setText("Username");
 
+        tfLogin.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+
+        btnLogin.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         btnLogin.setText("Login");
         btnLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -95,19 +93,18 @@ public class UnderOver extends javax.swing.JFrame {
             }
         });
 
-        lbWelcome.setText("Welcome");
+        lbWelcome.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        lbWelcome.setText("User: None");
         lbWelcome.setToolTipText("");
 
+        lbMoney.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         lbMoney.setText("Money: $0.00");
 
+        jLabel6.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("Place Bet");
 
-        jLabel7.setText("Under 7");
-
-        jLabel8.setText("Over 7");
-
-        jLabel9.setText("Exactly 7");
-
+        jButton1.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         jButton1.setText("Role Dice");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -115,14 +112,19 @@ public class UnderOver extends javax.swing.JFrame {
             }
         });
 
+        lbResults.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         lbResults.setText("Results");
 
+        lbDiceRoll1.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         lbDiceRoll1.setText("Dice 1: 0");
 
+        lbDiceRoll2.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         lbDiceRoll2.setText("Dice 2: 0");
 
+        lbRollPayout.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         lbRollPayout.setText("$0.00");
 
+        jComboBox1.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Under 7", "Over 7", "Exactly 7" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -130,160 +132,147 @@ public class UnderOver extends javax.swing.JFrame {
             }
         });
 
+        tfBet.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        tfBet.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
+        lbAmount.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        lbAmount.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbAmount.setText("Amount");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(36, 36, 36)
+                .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lbMoney)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lbDiceRoll1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lbResults)
-                        .addGap(84, 84, 84))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(28, 28, 28)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tfBet)
+                            .addComponent(lbAmount, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE))
+                        .addGap(37, 37, 37))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(tfUnder7, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(30, 30, 30)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel6)
-                                        .addGap(0, 0, Short.MAX_VALUE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(tfBet, javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE)
-                                            .addComponent(tfOver7, javax.swing.GroupLayout.Alignment.LEADING))
-                                        .addGap(63, 63, 63)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(tfExactly7)
-                                            .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                                .addGap(24, 24, 24)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(lbDiceRoll1)
+                                    .addComponent(lbDiceRoll2))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(lbResults, javax.swing.GroupLayout.DEFAULT_SIZE, 82, Short.MAX_VALUE)
+                                    .addComponent(lbRollPayout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lbWelcome)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel2)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(tfLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lbMoney)
-                                    .addComponent(btnLogin)))
-                            .addComponent(jButton1))
-                        .addGap(96, 96, 96))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lbDiceRoll2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lbRollPayout)
-                        .addGap(87, 87, 87))))
+                                    .addComponent(jLabel1))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(tfLogin)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnLogin)))
+                        .addGap(36, 36, 36))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(105, 105, 105)
+                .addComponent(jButton1)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(tfLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnLogin))
-                .addGap(42, 42, 42)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbWelcome)
-                    .addComponent(lbMoney))
-                .addGap(26, 26, 26)
-                .addComponent(jLabel6)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel8)
-                    .addComponent(jLabel9))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tfUnder7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfOver7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfExactly7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30)
+                .addComponent(lbWelcome)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lbMoney)
+                .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfBet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(16, 16, 16)
+                    .addComponent(jLabel6)
+                    .addComponent(lbAmount))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tfBet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(31, 31, 31)
                 .addComponent(jButton1)
+                .addGap(32, 32, 32)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbDiceRoll1)
+                    .addComponent(lbResults))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbResults)
-                    .addComponent(lbDiceRoll1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbDiceRoll2)
-                    .addComponent(lbRollPayout))
-                .addContainerGap(20, Short.MAX_VALUE))
+                    .addComponent(lbRollPayout)
+                    .addComponent(lbDiceRoll2))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    // LOGIN BUTTON
+
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        // LOGIN BUTTON CLICKED
-        // tfLogin
         String user = this.tfLogin.getText();   // Get username from login box
-        
-        readFile(storedUsers);  // get all user's that are currently saved
-        if (storedUsers.contains(user) == true){
-            
-        } else {
-            writeFile();
-        }
-        
-        
-        System.out.println(storedUsers.size());
-        
-        lbWelcome.setText("Welcome " + user);    // Set welcome message
+
+//        readFile(storedUsers);  // get all user's that are currently saved
+//        if (storedUsers.contains(user) == true){
+//            
+//        } else {
+//            writeFile();
+//        }
+        lbWelcome.setText("User: " + user);    // Set welcome message
         // TODO set user money
         String displayMoney = String.format("Money: $%.2f", userMoney);
         lbMoney.setText(displayMoney);
     }//GEN-LAST:event_btnLoginActionPerformed
 
-    // ROLL THE DICE BUTTON
+    /**
+     * Method activates when the button "Roll Dice" is clicked.
+     *
+     * @param evt the button was clicked
+     */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         Double userBet = Double.parseDouble(tfBet.getText());;
-        
+
         Dice d1 = new Dice(6);
         Dice d2 = new Dice(6);
 
         int roll1 = d1.roll();
         int roll2 = d2.roll();
         int result = roll1 + roll2; // overall result of the two dice
-        
-        double rollPayout = 0.0;
-        
-        if (choice == 1){
-            if (result > 6){ // lost
+
+        if (choice == 1) {
+            if (result > 6) { // lost
                 userMoney -= userBet;
                 userBet *= -1;
             } else { // won
                 userMoney += userBet;
             }
         }
-        if (choice == 2){
-            if (result < 8){ // lost
+        if (choice == 2) {
+            if (result < 8) { // lost
                 userMoney -= userBet;
                 userBet *= -1;
             } else { // won
                 userMoney += userBet;
             }
         }
-        if (choice == 3){
-            if (result != 7){ // lost
+        if (choice == 3) {
+            if (result != 7) { // lost
                 userMoney -= userBet;
                 userBet *= -1;
             } else { // won
@@ -291,16 +280,16 @@ public class UnderOver extends javax.swing.JFrame {
                 userBet *= 4;
             }
         }
-        
+
         String d1Text = String.format("Dice 1: %d", roll1);
         lbDiceRoll1.setText(d1Text);
-        
+
         String d2Text = String.format("Dice 2: %d", roll2);
         lbDiceRoll2.setText(d2Text);
-        
-        String displayMoney = String.format("$%.2f", userMoney);
+
+        String displayMoney = String.format("Money: $%.2f", userMoney);
         lbMoney.setText(displayMoney);
-        
+
         String disRollPayout = String.format("$%.2f", userBet);
         lbRollPayout.setText(disRollPayout);
 
@@ -308,22 +297,16 @@ public class UnderOver extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        //JComboBox cb = (JComboBox)e.getSource();
-        JComboBox cb = (JComboBox)evt.getSource();
-        String comboChoice = (String)cb.getSelectedItem();
+        JComboBox cb = (JComboBox) evt.getSource();
+        String comboChoice = (String) cb.getSelectedItem();
 
-        
-        //comboChoice.compareTo("Under 7");
-        if (comboChoice == "Under 7"){
+        if (comboChoice == "Under 7") {
             choice = 1;
-        } else if (comboChoice == "Over 7"){
+        } else if (comboChoice == "Over 7") {
             choice = 2;
-        } else if (comboChoice == "Exactly 7"){
+        } else if (comboChoice == "Exactly 7") {
             choice = 3;
-        } else {
-            choice = 0;
         }
-            
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     /**
@@ -368,9 +351,7 @@ public class UnderOver extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel lbAmount;
     private javax.swing.JLabel lbDiceRoll1;
     private javax.swing.JLabel lbDiceRoll2;
     private javax.swing.JLabel lbMoney;
@@ -378,9 +359,6 @@ public class UnderOver extends javax.swing.JFrame {
     private javax.swing.JLabel lbRollPayout;
     private javax.swing.JLabel lbWelcome;
     private javax.swing.JTextField tfBet;
-    private javax.swing.JTextField tfExactly7;
     private javax.swing.JTextField tfLogin;
-    private javax.swing.JTextField tfOver7;
-    private javax.swing.JTextField tfUnder7;
     // End of variables declaration//GEN-END:variables
 }
