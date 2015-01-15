@@ -7,9 +7,8 @@ package pr3_3;
 
 import java.io.*;   // method saveFile() needs java.io.BufferedWriter
 import java.util.regex.*;   // reading from file and retrieving proper info
-//import java.util.ArrayList;
 import java.util.*;
-import javax.swing.JTable;
+import javax.swing.table.*;
 
 /**
  *
@@ -174,9 +173,7 @@ public class EventManager extends javax.swing.JFrame {
 
         tbEventTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
                 "Title 1", "Title 2", "Title 3"
@@ -271,16 +268,27 @@ public class EventManager extends javax.swing.JFrame {
 
         writeToFile(event.outputEventPattern());  // attempt to write event to a file
 
+        
+        
+        
         List<Event> savedEvents = readFromFile();
         //savedEvents.get(0).name
-
-                
-        for (int i = 0; i < savedEvents.size(); i++) {
-            // object, row, column
-            tbEventTable.getModel().setValueAt(savedEvents.get(i).name, i, 0);
-            tbEventTable.getModel().setValueAt(savedEvents.get(i).location, i, 1);
-            tbEventTable.getModel().setValueAt(savedEvents.get(i).month, i, 2);
+        // tbEventTable.add
+        
+        
+        DefaultTableModel model = (DefaultTableModel) tbEventTable.getModel();
+        for (int i = 0; i < savedEvents.size(); i++){
+        Object[] row = { savedEvents.get(i).name, savedEvents.get(i).location, savedEvents.get(i).getDate()};
+        model.addRow(row);
         }
+        
+                
+//        for (int i = 0; i < savedEvents.size(); i++) {
+//            // object, row, column
+//            tbEventTable.getModel().setValueAt(savedEvents.get(i).name, i, 0);
+//            tbEventTable.getModel().setValueAt(savedEvents.get(i).location, i, 1);
+//            tbEventTable.getModel().setValueAt(savedEvents.get(i).month, i, 2);
+//        }
     }//GEN-LAST:event_btnAddEventActionPerformed
 
     /**

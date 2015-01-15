@@ -31,11 +31,14 @@ public class Event {
     public String outputEventPattern(){
         String tName = "<name>" + name + "<1done>";
         String tLoc = "<location>" + location + "<2done>";
-        String tMonth = "<month>" + month + "<4done>";
-        String tDay = "<day>" + day + "<5done>";
-        String tYear = "<year>" + year + "<6done>";
+        String tMonth = "<month>" + month + "<3done>";
+        String tDay = "<day>" + day + "<4done>";
+        String tYear = "<year>" + year + "<5done>";
         
         return tName + tLoc + tMonth + tDay + tYear;
     }
     
+    public String getDate(){
+        return month + "/" + day + "/" + year;
+    }
 }

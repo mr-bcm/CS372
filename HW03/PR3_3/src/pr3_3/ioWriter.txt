@@ -1,7 +1,4 @@
 <name>Symposium<1done><location>Weyer 107<2done><month>1<3done><day>15<4done><year>2015<5done>
 <name>Civil Rights<1done><location>Weyer 208<2done><month>1<3done><day>20<4done><year>2015<5done>
 <name>Convocation<1done><location>Cowles<2done><month>5<3done><day>5<4done><year>2015<5done>
-<name>ad<1done><location>ad<2done><month>1<4done><day>22<5done><year>1990<6done>
-<name>swimming<1done><location>john's house<2done><month>2<4done><day>13<5done><year>2012<6done>
-<name>Basketball Party<1done><location>Juan's Basement<2done><month>1<4done><day>17<5done><year>2015<6done>
-<name>Football Bash<1done><location>Whitworth Field<2done><month>1<4done><day>22<5done><year>2015<6done>
+<name>Community Swimming<1done><location>Community Pool<2done><month>2<3done><day>12<4done><year>2015<5done>
