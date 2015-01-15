@@ -7,14 +7,14 @@ package pr3_3;
 
 import java.io.*;   // method saveFile() needs java.io.BufferedWriter
 import java.util.regex.*;   // reading from file and retrieving proper info
+import java.util.ArrayList;
 
 /**
  *
  * @author Brennan
  */
 public class EventManager extends javax.swing.JFrame {
-    
-    
+
     public void writeToFile(String e) {
         File f = new File("C:\\Users\\Brennan\\Documents\\GitHub\\CS372\\HW03\\PR3_3\\src\\pr3_3\\ioWriter.txt");
         try {
@@ -27,37 +27,54 @@ public class EventManager extends javax.swing.JFrame {
             System.out.println(ex.getMessage());
         }
     }
-    
-    public void readFromFile(){
+
+    public void readFromFile() {
         // TODO: Create string array, this will hold the event name, location, and date
         File f = new File("C:\\Users\\Brennan\\Documents\\GitHub\\CS372\\HW03\\PR3_3\\src\\pr3_3\\ioWriter.txt");
 
-        try{
+        ArrayList<ArrayList<String>> tlist = new ArrayList<ArrayList<String>>();
+
+        try {
             BufferedReader rdr = new BufferedReader(new FileReader(f));
             String line;
-            while ((line = rdr.readLine()) != null){
+            int index = 0;
+            while ((line = rdr.readLine()) != null) {
+                tlist.add();
                 Pattern p = Pattern.compile("<name\\>(.*)?\\<1done>");
                 Matcher m = p.matcher(line);
-                while(m.find()){
+                while (m.find()) {
                     System.out.println(m.group(1));
                     // TODO: Event info array = m.group(1) data
+                    tlist.get(index).add(m.group(1));
+                    // tlist.add(m.group(1)); // for 1d ArrayList
                 }
-                
+
                 Pattern p2 = Pattern.compile("<location\\>(.*)?\\<2done>");
                 Matcher m2 = p2.matcher(line);
-                while(m2.find()){
+                while (m2.find()) {
                     System.out.println(m2.group(1));
+                    // tlist.add(m2.group(1)); // 1d ArrayList
                 }
-                
+
                 Pattern p3 = Pattern.compile("<date\\>(.*)?\\<3done>");
                 Matcher m3 = p3.matcher(line);
-                while(m3.find()){
+                while (m3.find()) {
                     System.out.println(m3.group(1));
+                    // tlist.add(m3.group(1)); // 1d ArrayList
+                }
+                index++;
+            }
+            // check contents of tlist
+            for (int i = 0; i < tlist.size(); i++) {
+                for (int j = 0; j < tlist.get(i).size(); j++) {
+                    System.out.printf("tlist index1 is %d, index 2 is %d: ", i, j);
+                    System.out.println(tlist.get(i).get(j));
                 }
             }
-                System.out.println(line);
+
+            System.out.println(line);
             rdr.close();
-        } catch (Exception e){
+        } catch (Exception e) {
             System.out.print("Error: ");
             System.out.println(e.getMessage());
         }
@@ -68,6 +85,9 @@ public class EventManager extends javax.swing.JFrame {
      */
     public EventManager() {
         initComponents();
+
+        readFromFile();
+        // Populate JTable
     }
 
     /**
@@ -237,6 +257,8 @@ public class EventManager extends javax.swing.JFrame {
         txtYear.setText("");
 
         writeToFile(event.outputEventPattern());  // attempt to write event to a file
+
+
     }//GEN-LAST:event_btnAddEventActionPerformed
 
     /**
