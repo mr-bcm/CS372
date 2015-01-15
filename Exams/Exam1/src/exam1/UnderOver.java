@@ -20,27 +20,35 @@ public class UnderOver extends javax.swing.JFrame {
     Double userMoney = 0.0;
 
     public void readFile(List<String> storedUsers) {
-        // List<String> users = new ArrayList<String>();
         File f = new File("Z:\\GitHub\\CS372\\Exams\\Exam1\\src\\exam1\\users.txt");
         try {
             BufferedReader rdr = new BufferedReader(new FileReader(f));
             String line;
             while ((line = rdr.readLine()) != null) {
-                System.out.println(line);
+                // System.out.println(line);
                 storedUsers.add(line);
             }
             rdr.close();
 
             // do something with the list of users
-        } catch (Exception ex) {
+        } catch (Exception e) {
             System.out.print("ERROR:");
-            System.out.println(ex.getMessage());
+            System.out.println(e.getMessage());
         }
 
     }
 
-    public void writeFile() {
-
+    public void writeFile(String username) {
+        File f = new File("Z:\\GitHub\\CS372\\Exams\\Exam1\\src\\exam1\\users.txt");
+        try {
+            BufferedWriter wrtr = new BufferedWriter(new FileWriter(f, true));
+            wrtr.write(username);
+            wrtr.newLine();
+            wrtr.close();
+        } catch (Exception e) {
+            System.out.print("ERROR: ");
+            System.out.println(e.getMessage());
+        }
     }
 
     /**
@@ -112,16 +120,16 @@ public class UnderOver extends javax.swing.JFrame {
             }
         });
 
-        lbResults.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
-        lbResults.setText("Results");
+        lbResults.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        lbResults.setText("Result");
 
-        lbDiceRoll1.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        lbDiceRoll1.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         lbDiceRoll1.setText("Dice 1: 0");
 
-        lbDiceRoll2.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        lbDiceRoll2.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         lbDiceRoll2.setText("Dice 2: 0");
 
-        lbRollPayout.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        lbRollPayout.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         lbRollPayout.setText("$0.00");
 
         jComboBox1.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
@@ -214,7 +222,7 @@ public class UnderOver extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbDiceRoll1)
                     .addComponent(lbResults))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbRollPayout)
                     .addComponent(lbDiceRoll2))
@@ -228,12 +236,12 @@ public class UnderOver extends javax.swing.JFrame {
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         String user = this.tfLogin.getText();   // Get username from login box
 
-//        readFile(storedUsers);  // get all user's that are currently saved
-//        if (storedUsers.contains(user) == true){
-//            
-//        } else {
-//            writeFile();
-//        }
+        readFile(storedUsers);  // get all user's that are currently saved
+        if (storedUsers.contains(user) == true){
+            // TODO: Get user's current balance
+        } else {
+            writeFile(user);
+        }
         lbWelcome.setText("User: " + user);    // Set welcome message
         // TODO set user money
         String displayMoney = String.format("Money: $%.2f", userMoney);
@@ -246,53 +254,71 @@ public class UnderOver extends javax.swing.JFrame {
      * @param evt the button was clicked
      */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Double userBet = Double.parseDouble(tfBet.getText());;
+        try {
+            Double userBet = Double.parseDouble(tfBet.getText());;
 
-        Dice d1 = new Dice(6);
-        Dice d2 = new Dice(6);
+            Dice d1 = new Dice(6);
+            Dice d2 = new Dice(6);
 
-        int roll1 = d1.roll();
-        int roll2 = d2.roll();
-        int result = roll1 + roll2; // overall result of the two dice
+            int roll1 = d1.roll();
+            int roll2 = d2.roll();
+            int result = roll1 + roll2; // overall result of the two dice
 
-        if (choice == 1) {
-            if (result > 6) { // lost
-                userMoney -= userBet;
-                userBet *= -1;
-            } else { // won
-                userMoney += userBet;
+            boolean winner = false;
+            
+            if (choice == 1) {
+                if (result > 6) { // lost
+                    userMoney -= userBet;
+                    userBet *= -1;
+                } else { // won
+                    userMoney += userBet;
+                    winner = true;
+                }
             }
-        }
-        if (choice == 2) {
-            if (result < 8) { // lost
-                userMoney -= userBet;
-                userBet *= -1;
-            } else { // won
-                userMoney += userBet;
+            if (choice == 2) {
+                if (result < 8) { // lost
+                    userMoney -= userBet;
+                    userBet *= -1;
+                } else { // won
+                    userMoney += userBet;
+                    winner = true;
+                }
             }
-        }
-        if (choice == 3) {
-            if (result != 7) { // lost
-                userMoney -= userBet;
-                userBet *= -1;
-            } else { // won
-                userMoney += (userBet * 4);
-                userBet *= 4;
+            if (choice == 3) {
+                if (result != 7) { // lost
+                    userMoney -= userBet;
+                    userBet *= -1;
+                } else { // won
+                    userMoney += (userBet * 4);
+                    userBet *= 4;
+                    winner = true;
+                }
             }
+
+            String d1Text = String.format("Dice 1: %d", roll1);
+            lbDiceRoll1.setText(d1Text);
+
+            String d2Text = String.format("Dice 2: %d", roll2);
+            lbDiceRoll2.setText(d2Text);
+
+            String displayMoney = String.format("Money: $%.2f", userMoney);
+            lbMoney.setText(displayMoney);
+
+            String disRollPayout = String.format("$%.2f", userBet);
+            lbRollPayout.setText(disRollPayout);
+            
+            String notifyResult = "";
+            if (winner){
+                notifyResult = "You Won!";
+            } else {
+                notifyResult = "You Lost..";
+            }
+            lbResults.setText(notifyResult);
+            
+        } catch (Exception e) {
+            System.out.print("ERROR: ");
+            System.out.println(e.getMessage());
         }
-
-        String d1Text = String.format("Dice 1: %d", roll1);
-        lbDiceRoll1.setText(d1Text);
-
-        String d2Text = String.format("Dice 2: %d", roll2);
-        lbDiceRoll2.setText(d2Text);
-
-        String displayMoney = String.format("Money: $%.2f", userMoney);
-        lbMoney.setText(displayMoney);
-
-        String disRollPayout = String.format("$%.2f", userBet);
-        lbRollPayout.setText(disRollPayout);
-
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
