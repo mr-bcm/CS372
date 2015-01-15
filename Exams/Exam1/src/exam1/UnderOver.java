@@ -10,7 +10,7 @@ import java.util.*;
 import javax.swing.JComboBox;
 
 /**
- *
+ * Program allows users the play the dice game Under Over.
  * @author bmetzelaar16
  */
 public class UnderOver extends javax.swing.JFrame {
@@ -19,6 +19,11 @@ public class UnderOver extends javax.swing.JFrame {
     int choice = 1; // combobox choice
     Double userMoney = 0.0;
 
+    /**
+     * Reads a local file to the program that stores the names of the users that
+     * have played this game before.
+     * @param storedUsers List that contains all of the users that have played the game.
+     */
     public void readFile(List<String> storedUsers) {
         File f = new File("Z:\\GitHub\\CS372\\Exams\\Exam1\\src\\exam1\\users.txt");
         try {
@@ -38,6 +43,10 @@ public class UnderOver extends javax.swing.JFrame {
 
     }
 
+    /**
+     * A new user is written to the text file of users.
+     * @param username the name of the new user
+     */
     public void writeFile(String username) {
         File f = new File("Z:\\GitHub\\CS372\\Exams\\Exam1\\src\\exam1\\users.txt");
         try {
@@ -161,11 +170,11 @@ public class UnderOver extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jComboBox1, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(28, 28, 28)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(57, 57, 57)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(tfBet)
-                            .addComponent(lbAmount, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE))
-                        .addGap(37, 37, 37))
+                            .addComponent(lbAmount, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE))
+                        .addGap(35, 35, 35))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -235,15 +244,16 @@ public class UnderOver extends javax.swing.JFrame {
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         String user = this.tfLogin.getText();   // Get username from login box
-
+        userMoney = 0.0;
+        
         readFile(storedUsers);  // get all user's that are currently saved
         if (storedUsers.contains(user) == true){
             // TODO: Get user's current balance
         } else {
             writeFile(user);
+            userMoney = 500.00;
         }
         lbWelcome.setText("User: " + user);    // Set welcome message
-        // TODO set user money
         String displayMoney = String.format("Money: $%.2f", userMoney);
         lbMoney.setText(displayMoney);
     }//GEN-LAST:event_btnLoginActionPerformed
