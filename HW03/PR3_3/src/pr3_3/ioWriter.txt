@@ -2,3 +2,6 @@
 <name>Civil Rights<1done><location>Weyer 208<2done><month>1<3done><day>20<4done><year>2015<5done>
 <name>Convocation<1done><location>Cowles<2done><month>5<3done><day>5<4done><year>2015<5done>
 <name>Community Swimming<1done><location>Community Pool<2done><month>2<3done><day>12<4done><year>2015<5done>
+<name>Racing<1done><location>Race Circuit<2done><month>5<3done><day>12<4done><year>2015<5done>
+<name>Art Show<1done><location>HUB - MPR<2done><month>7<3done><day>14<4done><year>2015<5done>
+<name>Spring Dance<1done><location>HUB MPR<2done><month>3<3done><day>2<4done><year>2015<5done>

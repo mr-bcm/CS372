@@ -17,7 +17,7 @@ import javax.swing.table.*;
 public class EventManager extends javax.swing.JFrame {
 
     public void writeToFile(String e) {
-        File f = new File("C:\\Users\\Brennan\\Documents\\GitHub\\CS372\\HW03\\PR3_3\\src\\pr3_3\\ioWriter.txt");
+        File f = new File("Z:\\GitHub\\CS372\\HW03\\PR3_3\\src\\pr3_3\\ioWriter.txt");
         try {
             BufferedWriter wrtr = new BufferedWriter(new FileWriter(f, true));
             wrtr.write(e);
@@ -30,7 +30,7 @@ public class EventManager extends javax.swing.JFrame {
     }
 
     public List<Event> readFromFile() {
-        File f = new File("C:\\Users\\Brennan\\Documents\\GitHub\\CS372\\HW03\\PR3_3\\src\\pr3_3\\ioWriter.txt");
+        File f = new File("Z:\\GitHub\\CS372\\HW03\\PR3_3\\src\\pr3_3\\ioWriter.txt");
         List<Event> eventList = new ArrayList<Event>();
 
         try {
@@ -47,28 +47,24 @@ public class EventManager extends javax.swing.JFrame {
                 Pattern p = Pattern.compile("<name\\>(.*)?\\<1done>");
                 Matcher m = p.matcher(line);
                 while (m.find()) {
-                    System.out.println(m.group(1));
                     tempName = m.group(1);
                 }
 
                 Pattern p2 = Pattern.compile("<location\\>(.*)?\\<2done>");
                 Matcher m2 = p2.matcher(line);
                 while (m2.find()) {
-                    System.out.println(m2.group(1));
                     tempLocation = m2.group(1);
                 }
 
                 Pattern p3 = Pattern.compile("<month\\>(.*)?\\<3done>");
                 Matcher m3 = p3.matcher(line);
                 while (m3.find()) {
-                    System.out.println(m3.group(1));
                     month = Integer.parseInt(m3.group(1));
                 }
 
                 Pattern p4 = Pattern.compile("<day\\>(.*)?\\<4done>");
                 Matcher m4 = p4.matcher(line);
                 while (m4.find()) {
-                    System.out.println(m4.group(1));
                     day = Integer.parseInt(m4.group(1));
 
                 }
@@ -76,7 +72,6 @@ public class EventManager extends javax.swing.JFrame {
                 Pattern p5 = Pattern.compile("<year\\>(.*)?\\<5done>");
                 Matcher m5 = p5.matcher(line);
                 while (m5.find()) {
-                    System.out.println(m5.group(1));
                     year = Integer.parseInt(m5.group(1));
                 }
 
@@ -84,7 +79,7 @@ public class EventManager extends javax.swing.JFrame {
                 eventList.add(event);
             }
 
-            System.out.println(line);
+            // System.out.println(line);
             rdr.close();
 
         } catch (Exception e) {
@@ -101,6 +96,24 @@ public class EventManager extends javax.swing.JFrame {
      */
     public EventManager() {
         initComponents();
+
+        // Get saved events
+        List<Event> savedEvents = readFromFile();
+        
+        // SORTS!
+        Collections.sort(savedEvents, new CompareEvents(){
+            @Override
+            public int compare(Event x, Event y){
+                return x.location.compareTo(y.location);
+            }
+        });
+
+        // Write the list of saved events to the JTable
+        DefaultTableModel model = (DefaultTableModel) tbEventTable.getModel();
+        for (int i = 0; i < savedEvents.size(); i++) {
+            Object[] row = {savedEvents.get(i).name, savedEvents.get(i).location, savedEvents.get(i).getDate()};
+            model.addRow(row);
+        }
     }
 
     /**
@@ -176,7 +189,7 @@ public class EventManager extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3"
+                "Event Name", "Location", "Date"
             }
         ));
         jScrollPane1.setViewportView(tbEventTable);
@@ -267,28 +280,6 @@ public class EventManager extends javax.swing.JFrame {
         txtYear.setText("");
 
         writeToFile(event.outputEventPattern());  // attempt to write event to a file
-
-        
-        
-        
-        List<Event> savedEvents = readFromFile();
-        //savedEvents.get(0).name
-        // tbEventTable.add
-        
-        
-        DefaultTableModel model = (DefaultTableModel) tbEventTable.getModel();
-        for (int i = 0; i < savedEvents.size(); i++){
-        Object[] row = { savedEvents.get(i).name, savedEvents.get(i).location, savedEvents.get(i).getDate()};
-        model.addRow(row);
-        }
-        
-                
-//        for (int i = 0; i < savedEvents.size(); i++) {
-//            // object, row, column
-//            tbEventTable.getModel().setValueAt(savedEvents.get(i).name, i, 0);
-//            tbEventTable.getModel().setValueAt(savedEvents.get(i).location, i, 1);
-//            tbEventTable.getModel().setValueAt(savedEvents.get(i).month, i, 2);
-//        }
     }//GEN-LAST:event_btnAddEventActionPerformed
 
     /**
