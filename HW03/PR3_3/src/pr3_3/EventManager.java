@@ -7,13 +7,22 @@ package pr3_3;
 
 import java.io.*;   // method saveFile() needs java.io.BufferedWriter
 import java.util.regex.*;   // reading from file and retrieving proper info
-import java.util.ArrayList;
+//import java.util.ArrayList;
+import java.util.*;
+import javax.swing.JTable;
 
 /**
  *
  * @author Brennan
  */
 public class EventManager extends javax.swing.JFrame {
+
+    // List<Event> eList = readFromFile();
+    
+    // JTable table = new JTable(data, columnNames);
+    //JTable table = new JTable(data, columnNames);
+    //jScrollPane1
+    //tbEventTable
 
     public void writeToFile(String e) {
         File f = new File("C:\\Users\\Brennan\\Documents\\GitHub\\CS372\\HW03\\PR3_3\\src\\pr3_3\\ioWriter.txt");
@@ -28,56 +37,59 @@ public class EventManager extends javax.swing.JFrame {
         }
     }
 
-    public void readFromFile() {
+    public List<Event> readFromFile() {
         // TODO: Create string array, this will hold the event name, location, and date
         File f = new File("C:\\Users\\Brennan\\Documents\\GitHub\\CS372\\HW03\\PR3_3\\src\\pr3_3\\ioWriter.txt");
 
-        ArrayList<ArrayList<String>> tlist = new ArrayList<ArrayList<String>>();
+        List<Event> eventList = new ArrayList<Event>();
 
         try {
             BufferedReader rdr = new BufferedReader(new FileReader(f));
             String line;
-            int index = 0;
+
+            String tempName = "";
+            String tempLocation = "";
+
             while ((line = rdr.readLine()) != null) {
-                tlist.add();
                 Pattern p = Pattern.compile("<name\\>(.*)?\\<1done>");
                 Matcher m = p.matcher(line);
                 while (m.find()) {
                     System.out.println(m.group(1));
                     // TODO: Event info array = m.group(1) data
-                    tlist.get(index).add(m.group(1));
-                    // tlist.add(m.group(1)); // for 1d ArrayList
+                    // tlist.add(m.group(1));
+                    tempName = m.group(1);
                 }
 
                 Pattern p2 = Pattern.compile("<location\\>(.*)?\\<2done>");
                 Matcher m2 = p2.matcher(line);
                 while (m2.find()) {
                     System.out.println(m2.group(1));
-                    // tlist.add(m2.group(1)); // 1d ArrayList
+                    // tlist.add(m2.group(1));
+                    tempLocation = m2.group(1);
                 }
 
                 Pattern p3 = Pattern.compile("<date\\>(.*)?\\<3done>");
                 Matcher m3 = p3.matcher(line);
                 while (m3.find()) {
                     System.out.println(m3.group(1));
-                    // tlist.add(m3.group(1)); // 1d ArrayList
-                }
-                index++;
-            }
-            // check contents of tlist
-            for (int i = 0; i < tlist.size(); i++) {
-                for (int j = 0; j < tlist.get(i).size(); j++) {
-                    System.out.printf("tlist index1 is %d, index 2 is %d: ", i, j);
-                    System.out.println(tlist.get(i).get(j));
+                    // tlist.add(m3.group(1));
+
+                    // Create Event objects
+                    Event event = new Event(tempName, tempLocation, 1, 5, 1990);
+                    eventList.add(event);
                 }
             }
 
             System.out.println(line);
             rdr.close();
+
         } catch (Exception e) {
             System.out.print("Error: ");
             System.out.println(e.getMessage());
         }
+
+        // return ArrayList of Event objects
+        return eventList;
     }
 
     /**
@@ -86,7 +98,7 @@ public class EventManager extends javax.swing.JFrame {
     public EventManager() {
         initComponents();
 
-        readFromFile();
+        
         // Populate JTable
     }
 
@@ -257,7 +269,6 @@ public class EventManager extends javax.swing.JFrame {
         txtYear.setText("");
 
         writeToFile(event.outputEventPattern());  // attempt to write event to a file
-
 
     }//GEN-LAST:event_btnAddEventActionPerformed
 
