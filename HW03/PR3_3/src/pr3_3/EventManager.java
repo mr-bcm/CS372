@@ -26,7 +26,9 @@ public class EventManager extends javax.swing.JFrame {
      * @param event contents to write to file
      */
     public void writeToFile(String event) {
-        File f = new File("C:\\Users\\Brennan\\Documents\\GitHub\\CS372\\HW03\\PR3_3\\src\\pr3_3\\ioWriter.txt");
+        // File f = new File("C:\\Users\\Brennan\\Documents\\GitHub\\CS372\\HW03\\PR3_3\\src\\pr3_3\\ioWriter.txt");
+        File f = new File("Z:\\GitHub\\CS372\\HW03\\PR3_3\\src\\pr3_3\\ioWriter.txt");
+
         try {
             BufferedWriter wrtr = new BufferedWriter(new FileWriter(f, true));
             wrtr.write(event);
@@ -48,7 +50,9 @@ public class EventManager extends javax.swing.JFrame {
      * was read in.
      */
     public List<Event> readFromFile() {
-        File f = new File("C:\\Users\\Brennan\\Documents\\GitHub\\CS372\\HW03\\PR3_3\\src\\pr3_3\\ioWriter.txt");
+        // File f = new File("C:\\Users\\Brennan\\Documents\\GitHub\\CS372\\HW03\\PR3_3\\src\\pr3_3\\ioWriter.txt");
+        File f = new File("Z:\\GitHub\\CS372\\HW03\\PR3_3\\src\\pr3_3\\ioWriter.txt");
+
         List<Event> eventList = new ArrayList<Event>();
 
         try {
@@ -216,7 +220,15 @@ public class EventManager extends javax.swing.JFrame {
             new String [] {
                 "Event Name", "Location", "Date"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tbEventTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbEventTableMouseClicked(evt);
