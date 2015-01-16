@@ -5,10 +5,8 @@
  */
 package pr3_3;
 
-import java.util.Calendar;
-
 /**
- * This class manages events that consist of an event name, location, and date.
+ * Creates Event objects that consist of a name, location, and date.
  * @author Brennan
  */
 public class Event {
@@ -21,11 +19,11 @@ public class Event {
 
     /**
      * Initialize the event with a name, location and date (month, day, year).
-     * @param name
-     * @param location
-     * @param month
-     * @param day
-     * @param year 
+     * @param name name of the event
+     * @param location where the event is is located
+     * @param month the month of the event
+     * @param day the day of the event
+     * @param year the year that the event is held
      */
     public Event(String name, String location, int month, int day, int year) {
         this.name = name;
@@ -35,10 +33,22 @@ public class Event {
         this.year = year;
     }
 
+    /**
+     * Return a string of the name, location, and date of the current event
+     * object
+     * @return string of the event objects name, location, month, day, and year
+     */
     public String outputEvent() {
         return name + " " + location + " " + month + "/" + day + "/" + year;
     }
 
+    /**
+     * Output a string of the event name, location, and date (month, day, year) 
+     * with additional formatting that aids in parsing and retrieving the data
+     * from a saved file.
+     * @return string of name, location, month, day, and year formatted for
+     * parsing
+     */
     public String outputEventPattern() {
         String tName = "<name>" + name + "<1done>";
         String tLoc = "<location>" + location + "<2done>";

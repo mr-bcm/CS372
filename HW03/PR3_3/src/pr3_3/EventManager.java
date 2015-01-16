@@ -5,32 +5,50 @@
  */
 package pr3_3;
 
+import java.awt.Color;
 import java.io.*;   // method saveFile() needs java.io.BufferedWriter
 import java.util.regex.*;   // reading from file and retrieving proper info
 import java.util.*;
 import javax.swing.table.*;
 
 /**
+ * Program application that saves events entered by the user in a text file and
+ * displays a current list of events based on what has been saved in the text
+ * file.
  *
  * @author Brennan
  */
 public class EventManager extends javax.swing.JFrame {
 
-    public void writeToFile(String e) {
-        File f = new File("Z:\\GitHub\\CS372\\HW03\\PR3_3\\src\\pr3_3\\ioWriter.txt");
+    /**
+     * Write the contents of an event to a text file.
+     *
+     * @param event contents to write to file
+     */
+    public void writeToFile(String event) {
+        File f = new File("C:\\Users\\Brennan\\Documents\\GitHub\\CS372\\HW03\\PR3_3\\src\\pr3_3\\ioWriter.txt");
         try {
             BufferedWriter wrtr = new BufferedWriter(new FileWriter(f, true));
-            wrtr.write(e);
+            wrtr.write(event);
             wrtr.newLine();
             wrtr.close();
-        } catch (Exception ex) {
-            System.out.print("ERROR: ");
-            System.out.println(ex.getMessage());
+        } catch (Exception e) {
+            System.out.println("ERROR: Writing To File");
+            System.out.print("MSG: ");
+            System.out.println(e.getMessage());
         }
     }
 
+    /**
+     * Reads the contents from a saved text file, creates an Event object for
+     * each line of the text file, and then returns a List of those array
+     * objects.
+     *
+     * @return a list of Event objects that represent each line of the file that
+     * was read in.
+     */
     public List<Event> readFromFile() {
-        File f = new File("Z:\\GitHub\\CS372\\HW03\\PR3_3\\src\\pr3_3\\ioWriter.txt");
+        File f = new File("C:\\Users\\Brennan\\Documents\\GitHub\\CS372\\HW03\\PR3_3\\src\\pr3_3\\ioWriter.txt");
         List<Event> eventList = new ArrayList<Event>();
 
         try {
@@ -78,16 +96,13 @@ public class EventManager extends javax.swing.JFrame {
                 Event event = new Event(tempName, tempLocation, month, day, year);
                 eventList.add(event);
             }
-
-            // System.out.println(line);
             rdr.close();
 
         } catch (Exception e) {
-            System.out.print("Error: ");
+            System.out.println("ERROR: Reading From File");
+            System.out.print("MSG: ");
             System.out.println(e.getMessage());
         }
-
-        // return ArrayList of Event objects
         return eventList;
     }
 
@@ -116,7 +131,8 @@ public class EventManager extends javax.swing.JFrame {
                 model.addRow(row);
             }
         } catch (Exception e) {
-            System.out.print("ERROR: ");
+            System.out.println("ERROR: Populating startup table.");
+            System.out.print("MSG: ");
             System.out.println(e.getMessage());
         }
     }
@@ -277,19 +293,79 @@ public class EventManager extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Upon clicking the Add Event button in the application the data that was
+     * entered will written to a text file for future use.
+     *
+     * @param evt
+     */
     private void btnAddEventActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddEventActionPerformed
-        int month = Integer.parseInt(this.txtMonth.getText());
-        int day = Integer.parseInt(this.txtDay.getText());
-        int year = Integer.parseInt(this.txtYear.getText());
-        Event event = new Event(txtEventName.getText(), txtLocation.getText(), month, day, year);
+        try {
+            // If textboxes are blank, they will be highlighted red
+            if ((this.txtMonth.getText().equals(""))
+                    || (this.txtDay.getText().equals(""))
+                    || (this.txtYear.getText().equals(""))
+                    || (this.txtEventName.getText().equals(""))
+                    || (this.txtLocation.getText().equals(""))) {
 
-        txtEventName.setText("");
-        txtLocation.setText("");
-        txtMonth.setText("");
-        txtDay.setText("");
-        txtYear.setText("");
+                if (this.txtMonth.getText().equals("")) {
+                    txtMonth.setBackground(Color.red);
+                } else {
+                    txtMonth.setBackground(Color.white);
+                }
 
-        writeToFile(event.outputEventPattern());  // attempt to write event to a file
+                if (this.txtDay.getText().equals("")) {
+                    txtDay.setBackground(Color.red);
+                } else {
+                    txtDay.setBackground(Color.white);
+                }
+
+                if (this.txtYear.getText().equals("")) {
+                    txtYear.setBackground(Color.red);
+                } else {
+                    txtYear.setBackground(Color.white);
+                }
+
+                if (this.txtEventName.getText().equals("")) {
+                    txtEventName.setBackground(Color.red);
+                } else {
+                    txtEventName.setBackground(Color.white);
+                }
+
+                if (this.txtLocation.getText().equals("")) {
+                    txtLocation.setBackground(Color.red);
+                } else {
+                    txtLocation.setBackground(Color.white);
+                }
+            } else {
+                // Highlight text boxes back to white
+                txtMonth.setBackground(Color.WHITE);
+                txtDay.setBackground(Color.white);
+                txtYear.setBackground(Color.white);
+                txtEventName.setBackground(Color.white);
+                txtLocation.setBackground(Color.white);
+
+                // Get the date of the user's event
+                int month = Integer.parseInt(this.txtMonth.getText());
+                int day = Integer.parseInt(this.txtDay.getText());
+                int year = Integer.parseInt(this.txtYear.getText());
+                Event event = new Event(txtEventName.getText(), txtLocation.getText(), month, day, year);
+
+                // Reset text boxes
+                txtEventName.setText("");
+                txtLocation.setText("");
+                txtMonth.setText("");
+                txtDay.setText("");
+                txtYear.setText("");
+
+                // Write event to file
+                writeToFile(event.outputEventPattern());
+            }
+        } catch (Exception e) {
+            System.out.println("ERROR: EventActionPerformed");
+            System.out.print("MSG: ");
+            System.out.println(e.getMessage());
+        }
     }//GEN-LAST:event_btnAddEventActionPerformed
 
     private void tbEventTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbEventTableMouseClicked

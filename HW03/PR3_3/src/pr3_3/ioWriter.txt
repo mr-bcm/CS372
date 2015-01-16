@@ -5,3 +5,4 @@
 <name>Racing<1done><location>Race Circuit<2done><month>5<3done><day>12<4done><year>2015<5done>
 <name>Art Show<1done><location>HUB - MPR<2done><month>7<3done><day>14<4done><year>2015<5done>
 <name>Spring Dance<1done><location>HUB MPR<2done><month>3<3done><day>2<4done><year>2015<5done>
+<name>Snow Trip<1done><location>Mountain<2done><month>1<3done><day>6<4done><year>2015<5done>
