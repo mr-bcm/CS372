@@ -99,20 +99,25 @@ public class EventManager extends javax.swing.JFrame {
 
         // Get saved events
         List<Event> savedEvents = readFromFile();
-        
-        // SORTS!
-        Collections.sort(savedEvents, new CompareEvents(){
-            @Override
-            public int compare(Event x, Event y){
-                return x.location.compareTo(y.location);
-            }
-        });
 
-        // Write the list of saved events to the JTable
-        DefaultTableModel model = (DefaultTableModel) tbEventTable.getModel();
-        for (int i = 0; i < savedEvents.size(); i++) {
-            Object[] row = {savedEvents.get(i).name, savedEvents.get(i).location, savedEvents.get(i).getDate()};
-            model.addRow(row);
+        try {
+            // SORTS!
+            Collections.sort(savedEvents, new CompareEvents() {
+                @Override
+                public int compare(Event x, Event y) {
+                    return x.location.compareTo(y.location);
+                }
+            });
+
+            // Write the list of saved events to the JTable
+            DefaultTableModel model = (DefaultTableModel) tbEventTable.getModel();
+            for (int i = 0; i < savedEvents.size(); i++) {
+                Object[] row = {savedEvents.get(i).name, savedEvents.get(i).location, savedEvents.get(i).getDate()};
+                model.addRow(row);
+            }
+        } catch (Exception e) {
+            System.out.print("ERROR: ");
+            System.out.println(e.getMessage());
         }
     }
 
@@ -288,7 +293,7 @@ public class EventManager extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAddEventActionPerformed
 
     private void tbEventTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbEventTableMouseClicked
-        
+
     }//GEN-LAST:event_tbEventTableMouseClicked
 
     /**
