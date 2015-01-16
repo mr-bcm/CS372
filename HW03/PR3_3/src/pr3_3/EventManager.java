@@ -192,6 +192,11 @@ public class EventManager extends javax.swing.JFrame {
                 "Event Name", "Location", "Date"
             }
         ));
+        tbEventTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbEventTableMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tbEventTable);
 
         lbCurrentEvents.setFont(new java.awt.Font("Calibri", 0, 20)); // NOI18N
@@ -281,6 +286,10 @@ public class EventManager extends javax.swing.JFrame {
 
         writeToFile(event.outputEventPattern());  // attempt to write event to a file
     }//GEN-LAST:event_btnAddEventActionPerformed
+
+    private void tbEventTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbEventTableMouseClicked
+        
+    }//GEN-LAST:event_tbEventTableMouseClicked
 
     /**
      * @param args the command line arguments
