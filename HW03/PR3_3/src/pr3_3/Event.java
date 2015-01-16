@@ -8,7 +8,7 @@ package pr3_3;
 import java.util.Calendar;
 
 /**
- *
+ * This class manages events that consist of an event name, location, and date.
  * @author Brennan
  */
 public class Event {
@@ -19,6 +19,14 @@ public class Event {
     int day = 0;
     int year = 0;
 
+    /**
+     * Initialize the event with a name, location and date (month, day, year).
+     * @param name
+     * @param location
+     * @param month
+     * @param day
+     * @param year 
+     */
     public Event(String name, String location, int month, int day, int year) {
         this.name = name;
         this.location = location;
