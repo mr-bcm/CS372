@@ -116,7 +116,7 @@ public class EventManager extends javax.swing.JFrame {
         List<Event> savedEvents = readFromFile();
 
         try {
-            // SORTS!
+            // Initial table sort
             Collections.sort(savedEvents, new CompareEvents() {
                 @Override
                 public int compare(Event x, Event y) {
@@ -130,6 +130,10 @@ public class EventManager extends javax.swing.JFrame {
                 Object[] row = {savedEvents.get(i).name, savedEvents.get(i).location, savedEvents.get(i).getDate()};
                 model.addRow(row);
             }
+
+            // Sort Table On Table Header Click
+            tbEventTable.setAutoCreateRowSorter(rootPaneCheckingEnabled);
+
         } catch (Exception e) {
             System.out.println("ERROR: Populating startup table.");
             System.out.print("MSG: ");
@@ -349,6 +353,7 @@ public class EventManager extends javax.swing.JFrame {
                 int month = Integer.parseInt(this.txtMonth.getText());
                 int day = Integer.parseInt(this.txtDay.getText());
                 int year = Integer.parseInt(this.txtYear.getText());
+
                 Event event = new Event(txtEventName.getText(), txtLocation.getText(), month, day, year);
 
                 // Reset text boxes
