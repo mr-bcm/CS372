@@ -1,13 +1,3 @@
 <name>Symposium<1done><location>Weyer 107<2done><month>1<3done><day>15<4done><year>2015<5done>
 <name>Civil Rights<1done><location>Weyer 208<2done><month>1<3done><day>20<4done><year>2015<5done>
 <name>Convocation<1done><location>Cowles<2done><month>5<3done><day>5<4done><year>2015<5done>
-<name>Community Swimming<1done><location>Community Pool<2done><month>2<3done><day>12<4done><year>2015<5done>
-<name>Racing<1done><location>Race Circuit<2done><month>5<3done><day>12<4done><year>2015<5done>
-<name>Art Show<1done><location>HUB - MPR<2done><month>7<3done><day>14<4done><year>2015<5done>
-<name>Spring Dance<1done><location>HUB MPR<2done><month>3<3done><day>2<4done><year>2015<5done>
-<name>Snow Trip<1done><location>Mountain<2done><month>1<3done><day>6<4done><year>2015<5done>
-<name>Doctor's Appointment<1done><location>Roseville<2done><month>10<3done><day>5<4done><year>2015<5done>
-<name>Swim Day<1done><location>Whitworth Aquatics Center<2done><month>2<3done><day>12<4done><year>1998<5done>
-<name>Future<1done><location>The Future<2done><month>2<3done><day>12<4done><year>2020<5done>
-<name>My House<1done><location>Future When I'm Old<2done><month>11<3done><day>23<4done><year>2047<5done>
-<name>Test FileWrite Class<1done><location>Hope this works!<2done><month>1<3done><day>16<4done><year>2015<5done>

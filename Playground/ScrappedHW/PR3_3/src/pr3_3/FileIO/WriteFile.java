@@ -9,31 +9,19 @@ import java.io.BufferedWriter;
 import java.io.File;
 
 /**
- * Takes in a file path and writes data given to the object via string to the
- * document at the file path that it was initialized with.
  *
  * @author Brennan
  */
 public class WriteFile {
-
+    // File f;
     String filePath = "";
-
-    /**
-     * Initialized with a string of the location where the text document
-     * resides.
-     *
-     * @param filePath the file system path for the text document
-     */
-    public WriteFile(String filePath) {
-        this.filePath = filePath;
-    }
-
-    /**
-     * Writes the contents of the string to a given file line by line.
-     *
-     * @param content the string/line that is to be written to the text file
-     */
-    public void writeString(String content) {
+    
+    
+    public WriteFile (String filePath) {
+    this.filePath = filePath;
+}
+    
+    public void writeString(String content){
         File f = new File(filePath);
         try {
             BufferedWriter wrtr = new BufferedWriter(new java.io.FileWriter(f, true));
@@ -46,5 +34,5 @@ public class WriteFile {
             System.out.println(e.getMessage());
         }
     }
-
+    
 }

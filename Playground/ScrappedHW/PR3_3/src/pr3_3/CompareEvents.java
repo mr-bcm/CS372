@@ -18,7 +18,7 @@ public class CompareEvents implements Comparator<Event> {
      * The compare method from the Comparator class is overridden so that it
      * takes two Event objects and compares them based off of their names.
      * <p>
-     * We start by comparing years, if the year is the same we compare months,
+     * We start by comparing years, if the year is the same we compare months, 
      * if the months are the same then we compare days.
      *
      * @param x first Event object for comparison
@@ -28,17 +28,17 @@ public class CompareEvents implements Comparator<Event> {
      */
     @Override
     public int compare(Event x, Event y) {
-        if (x.year < y.year) {
+        if (x.year < y.year){
             return -1;  // x is < y
-        } else if (x.year > y.year) {
+        } else if (x.year > y.year){
             return 1;   // x is > y
-        } else if (x.year == y.year) {
-            if (x.month < y.month) {
+        } else if (x.year == y.year){
+            if (x.month < y.month){
                 return -1;  // x is < y
-            } else if (x.month > y.month) {
+            } else if (x.month > y.month){
                 return 1;   // x is > y
-            } else if (x.month == y.month) {
-                if (x.day < y.day) {
+            } else if (x.month == y.month){
+                if (x.day < y.day){
                     return -1;  // x is < y
                 } else {
                     return 1;
@@ -47,4 +47,19 @@ public class CompareEvents implements Comparator<Event> {
         }
         return 0;
     }
+    
+//    // ORIGINAL
+//    /**
+//     * The compare method from the Comparator class is overridden so that it
+//     * takes two Event objects and compares them based off of their names.
+//     *
+//     * @param x first Event object for comparison
+//     * @param y second Event object for comparison
+//     * @return a negative, zero, or positive integer that represents whether the
+//     * first argument is less, equal, or greater than the second
+//     */
+//    @Override
+//    public int compare(Event x, Event y) {
+//        return x.name.compareToIgnoreCase(y.name);
+//    }
 }

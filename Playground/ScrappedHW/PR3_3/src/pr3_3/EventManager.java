@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package pr3_3;
-
 import pr3_3.FileIO.WriteFile;
 
 import java.awt.Color;
@@ -12,6 +11,7 @@ import java.io.*;   // method saveFile() needs java.io.BufferedWriter
 import java.util.regex.*;   // reading from file and retrieving proper info
 import java.util.*;
 import javax.swing.table.*;
+import pr3_3.FileIO.ReadFile;
 
 /**
  * Program application that saves events entered by the user in a text file and
@@ -21,18 +21,7 @@ import javax.swing.table.*;
  * @author Brennan
  */
 public class EventManager extends javax.swing.JFrame {
-
     DefaultTableModel model;
-
-    /**
-     * Creates new form EventManager
-     */
-    public EventManager() {
-        initComponents();
-
-        // Initialize displayed events on startup
-        updateTable();
-    }
 
     /**
      * Reads the contents from a saved text file, creates an Event object for
@@ -104,12 +93,45 @@ public class EventManager extends javax.swing.JFrame {
     }
 
     /**
-     * Updates the programs table based on the document of saved events.
+     * Creates new form EventManager
      */
-    public void updateTable() {
+    public EventManager() {
+        initComponents();
+
+        // Get saved events
+        List<Event> savedEvents = readFromFile();
+        
+        //List<String> pStrings;
+        // String[] pStrings = {"<name\\>(.*)?\\<1done>", "<location\\>(.*)?\\<2done>", "<month\\>(.*)?\\<3done>", "<day\\>(.*)?\\<4done>", "<year\\>(.*)?\\<5done>"};
+        
+//        pStrings = ("<name\\>(.*)?\\<1done>", "<location\\>(.*)?\\<2done>", "<month\\>(.*)?\\<3done>", "<day\\>(.*)?\\<4done>", "<year\\>(.*)?\\<5done>");
+//        pStrings = new List<String>("<name\\>(.*)?\\<1done>", "<location\\>(.*)?\\<2done>", "<month\\>(.*)?\\<3done>", "<day\\>(.*)?\\<4done>", "<year\\>(.*)?\\<5done>");
+       
+        List<String> pStrings = new ArrayList<String>();
+        pStrings.add("<name\\>(.*)?\\<1done>");
+        pStrings.add("<location\\\\>(.*)?\\\\<2done>");
+        pStrings.add("<month\\\\>(.*)?\\\\<3done>");
+        pStrings.add("<day\\\\>(.*)?\\\\<4done>");
+        pStrings.add("<year\\\\>(.*)?\\\\<5done>");
+        
+        ReadFile rf = new ReadFile("C:\\Users\\Brennan\\Documents\\GitHub\\CS372\\HW03\\PR3_3\\src\\pr3_3\\ioWriter.txt");
+        pStrings = rf.getRegPatterns(pStrings);
+        
+        int month, day, year;
+        month = Integer.parseInt(pStrings.get(2));
+        day = Integer.parseInt(pStrings.get(3));
+        year = Integer.parseInt(pStrings.get(4));
+        
+        List<Event> savedEvents = rf.getRegPatterns();
+
         try {
-            List<Event> savedEvents = readFromFile();
-            Collections.sort(savedEvents, new CompareEvents()); // Initial Table Sort
+//            // Initial table sort
+//            Collections.sort(savedEvents, new CompareEvents() {
+//                @Override
+//                public int compare(Event x, Event y) {
+//                    return x.location.compareTo(y.location);
+//                }
+//            });
 
             // Write the list of saved events to the JTable
             model = (DefaultTableModel) tbEventTable.getModel();
@@ -120,6 +142,7 @@ public class EventManager extends javax.swing.JFrame {
 
             // Sort Table On Table Header Click
             tbEventTable.setAutoCreateRowSorter(rootPaneCheckingEnabled);
+
         } catch (Exception e) {
             System.out.println("ERROR: Populating startup table.");
             System.out.print("MSG: ");
@@ -361,15 +384,13 @@ public class EventManager extends javax.swing.JFrame {
                 WriteFile wf = new WriteFile("C:\\Users\\Brennan\\Documents\\GitHub\\CS372\\HW03\\PR3_3\\src\\pr3_3\\ioWriter.txt");
                 // WriteFile wf = new File("Z:\\GitHub\\CS372\\HW03\\PR3_3\\src\\pr3_3\\ioWriter.txt");
                 wf.writeString(event.outputEventPattern());
-
-                updateTable();
             }
         } catch (Exception e) {
             System.out.println("ERROR: EventActionPerformed");
             System.out.print("MSG: ");
             System.out.println(e.getMessage());
         }
-
+        
     }//GEN-LAST:event_btnAddEventActionPerformed
 
     private void tbEventTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbEventTableMouseClicked
