@@ -1,68 +1,92 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+// Original ValueRange has been turned into a text file with this version
+// replacing it. The old version did not have static methods and did not support
+// generic type T. Also, rather than l.size() == 0 I am now doing 
+// l.isEmpty().
 package pr2_6;
 
 import java.util.*;
 
 /**
- * Contains methods for calculating the minimum, maximum, and average values
+ * Contains generic methods for calculating the minimum, maximum, and average values
  * within a List.
- * 
+ * <p>
+ * Min and max have their own generic methods, however average consists of two
+ * methods, one being for integers and the other for doubles.
+ *
  * @author Brennan
  */
 public class ValueRange {
-    //PT -- since ValueRange doesn't have any member variables, the methods
-    //      could all be static, making your code more flexible.
-
     /**
      * Returns the smallest value that was found within a given List.
-     * 
-     * @param l represents a list that contains double variables
+     *
+     * @param <T> list of values
+     * @param l represents a list that contains variables
      * @return returns the minimum value that appeared in the List
      */
-    public double getMin(List l) {
-        double min = Double.MAX_VALUE;
+    public static <T extends Comparable> T getMin(List<T> l) {
+        if (l.isEmpty()) {
+            throw new IllegalArgumentException();
+        }
+        T min = l.get(0);
 
         for (int i = 0; i < l.size(); i++) {
-            if (min > (double) l.get(i)) {
-                min = (double) l.get(i);
+            int j = min.compareTo(l.get(i));
+            if (j == 1) {
+                min = l.get(i);
             }
         }
         return min;
     }
 
     /**
-     * Returns the largest value that was found within a given List.
-     * 
-     * @param l represents a list that contains double variables
-     * @return returns the maximum value that appeared in the List
+     * Returns the largest value within the given List.
+     *
+     * @param <T> list of values
+     * @param l represents a list of variables
+     * @return returns the maximum variable value found in the list
      */
-    public double getMax(List l) {
-        double max = Double.MIN_VALUE;
-        
-        for (int i = 0; i < l.size(); i++){
-            if (max < (double) l.get(i)){
-                max = (double) l.get(i);
+    public static <T extends Comparable> T getMax(List<T> l) {
+        if (l.isEmpty()) {
+            throw new IllegalArgumentException();
+        }
+        T max = l.get(l.size() - 1);
+
+        for (int i = 0; i < l.size(); i++) {
+            int j = max.compareTo(l.get(i));
+            if (j == -1) {
+                max = l.get(i);
             }
         }
         return max;
     }
 
     /**
-     * Returns the average value that was found within a given List.
+     * Returns the average value found within the given list as a double.
      * 
-     * @param l represents a list that contains double variables
-     * @return returns the average value that appeared in the List
+     * @param l represents a list of double variables
+     * @return returns the average double value that appeared in the List
      */
-    public double getAverage(List l) {
+    public static double getAverageDouble(List l) {
         double sum = 0;
 
         for (int i = 0; i < l.size(); i++) {
             sum += (double) l.get(i);
         }
         return sum / (double) l.size();
+    }
+
+    /**
+     * Returns the average value found within the given list as an integer.
+     * 
+     * @param l represents a list of integer variables
+     * @return returns the average integer value that appeared in the List
+     */
+    public static int getAverageInt(List l) {
+        int sum = 0;
+
+        for (int i = 0; i < l.size(); i++) {
+            sum += (int) l.get(i);
+        }
+        return sum / (int) l.size();
     }
 }

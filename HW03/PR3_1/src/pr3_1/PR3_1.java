@@ -5,6 +5,7 @@
  * Due: 1/13/2015
  */
 package pr3_1;
+import pr2_6.ValueRange;    // used for min, max, and average
 
 import java.util.*; // Scanner, List, ListArray
 
@@ -24,7 +25,7 @@ public class PR3_1 {
      */
     public static void main(String[] args) {
         List<Integer> l = new ArrayList<Integer>();
-        Range vr = new Range();
+        ValueRange vr = new ValueRange();
 
         System.out.println("Enter 10 numbers:");
         Scanner input = new Scanner(System.in);
@@ -34,7 +35,6 @@ public class PR3_1 {
                 l.add(input.nextInt());
             }
         } catch (InputMismatchException e) {
-            // System.out.println(e.getMessage());
             System.out.println("ERROR: You can only enter integers");
         }
 

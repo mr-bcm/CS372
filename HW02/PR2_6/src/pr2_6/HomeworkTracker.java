@@ -176,7 +176,7 @@ public class HomeworkTracker extends javax.swing.JFrame {
         grades.add(c);
 
         // Average Grade Display
-        f = String.format("%1.2f", vr.getAverage(grades));
+        f = String.format("%1.2f", vr.getAverageInt(grades));
         lbAverage.setText(f);
         // Best Grade
         f = String.format("%1.2f", vr.getMax(grades));
