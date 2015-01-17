@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package pr3_3;
+import pr3_3.FileIO.WriteFile;
 
 import java.awt.Color;
 import java.io.*;   // method saveFile() needs java.io.BufferedWriter
@@ -19,27 +20,7 @@ import javax.swing.table.*;
  * @author Brennan
  */
 public class EventManager extends javax.swing.JFrame {
-
-    /**
-     * Write the contents of an event to a text file.
-     *
-     * @param event contents to write to file
-     */
-    public void writeToFile(String event) {
-        // File f = new File("C:\\Users\\Brennan\\Documents\\GitHub\\CS372\\HW03\\PR3_3\\src\\pr3_3\\ioWriter.txt");
-        File f = new File("Z:\\GitHub\\CS372\\HW03\\PR3_3\\src\\pr3_3\\ioWriter.txt");
-
-        try {
-            BufferedWriter wrtr = new BufferedWriter(new FileWriter(f, true));
-            wrtr.write(event);
-            wrtr.newLine();
-            wrtr.close();
-        } catch (Exception e) {
-            System.out.println("ERROR: Writing To File");
-            System.out.print("MSG: ");
-            System.out.println(e.getMessage());
-        }
-    }
+    DefaultTableModel model;
 
     /**
      * Reads the contents from a saved text file, creates an Event object for
@@ -50,8 +31,8 @@ public class EventManager extends javax.swing.JFrame {
      * was read in.
      */
     public List<Event> readFromFile() {
-        // File f = new File("C:\\Users\\Brennan\\Documents\\GitHub\\CS372\\HW03\\PR3_3\\src\\pr3_3\\ioWriter.txt");
-        File f = new File("Z:\\GitHub\\CS372\\HW03\\PR3_3\\src\\pr3_3\\ioWriter.txt");
+        File f = new File("C:\\Users\\Brennan\\Documents\\GitHub\\CS372\\HW03\\PR3_3\\src\\pr3_3\\ioWriter.txt");
+        // File f = new File("Z:\\GitHub\\CS372\\HW03\\PR3_3\\src\\pr3_3\\ioWriter.txt");
 
         List<Event> eventList = new ArrayList<Event>();
 
@@ -120,16 +101,16 @@ public class EventManager extends javax.swing.JFrame {
         List<Event> savedEvents = readFromFile();
 
         try {
-            // Initial table sort
-            Collections.sort(savedEvents, new CompareEvents() {
-                @Override
-                public int compare(Event x, Event y) {
-                    return x.location.compareTo(y.location);
-                }
-            });
+//            // Initial table sort
+//            Collections.sort(savedEvents, new CompareEvents() {
+//                @Override
+//                public int compare(Event x, Event y) {
+//                    return x.location.compareTo(y.location);
+//                }
+//            });
 
             // Write the list of saved events to the JTable
-            DefaultTableModel model = (DefaultTableModel) tbEventTable.getModel();
+            model = (DefaultTableModel) tbEventTable.getModel();
             for (int i = 0; i < savedEvents.size(); i++) {
                 Object[] row = {savedEvents.get(i).name, savedEvents.get(i).location, savedEvents.get(i).getDate()};
                 model.addRow(row);
@@ -376,13 +357,16 @@ public class EventManager extends javax.swing.JFrame {
                 txtYear.setText("");
 
                 // Write event to file
-                writeToFile(event.outputEventPattern());
+                WriteFile wf = new WriteFile("C:\\Users\\Brennan\\Documents\\GitHub\\CS372\\HW03\\PR3_3\\src\\pr3_3\\ioWriter.txt");
+                // WriteFile wf = new File("Z:\\GitHub\\CS372\\HW03\\PR3_3\\src\\pr3_3\\ioWriter.txt");
+                wf.writeString(event.outputEventPattern());
             }
         } catch (Exception e) {
             System.out.println("ERROR: EventActionPerformed");
             System.out.print("MSG: ");
             System.out.println(e.getMessage());
         }
+        
     }//GEN-LAST:event_btnAddEventActionPerformed
 
     private void tbEventTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbEventTableMouseClicked
