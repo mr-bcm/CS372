@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package pr4_1;
+
 import java.util.ArrayList;
 import java.util.List;
 import pr4_1.FileIO.*;
@@ -19,22 +20,40 @@ public class RestaurantReviewer extends javax.swing.JFrame {
      */
     public RestaurantReviewer() {
         initComponents();
-        
-    }
-    
-    public void popReviewTbl (){
-        ReadFile rf = new ReadFile("C:\\Users\\Brennan\\Documents\\GitHub\\CS372\\HW03\\PR3_3\\src\\pr3_3\\ioWriter.txt");
-        // ReadFile rf = new ReadFile("Z:\\GitHub\\CS372\\HW03\\PR3_3\\src\\pr3_3\\ioWriter.txt");
 
+    }
+
+    public void popReviewTbl() {
+        ReadFile rf = new ReadFile("C:\\Users\\Brennan\\Documents\\GitHub\\CS372\\HW04\\PR4_1\\src\\pr4_1\\FileIO\\TextTest.txt");
+        // ReadFile rf = new ReadFile("");
+
+        // READ FROM FILE TEST
         List<String> savedRevs = new ArrayList<String>();
-        
+        rf.readFile();
         savedRevs = rf.getContents();
-        
-        Reviewer reviewer = new Reviewer();
-        
-        List<Reviewer> revList;
-        
-        
+
+//            System.out.println(savedRevs.get(1));
+//            String[] linesplit = savedRevs.get(1).split("\\|");
+//            System.out.println(linesplit[0]);
+//            System.out.println(linesplit[1]);
+//            System.out.println(linesplit[2]);
+        List<Reviewer> revList = new ArrayList<Reviewer>();
+        String name = "";
+        String addr = "";
+        String review = "";
+        int rating = 0;
+
+        for (int i = 0; i < savedRevs.size(); i++) {
+            String[] temp = savedRevs.get(i).split("\\|");
+            name = temp[0];
+            addr = temp[1];
+            review = temp[2];
+            rating = Integer.parseInt(temp[3]);
+
+            Reviewer tempRev = new Reviewer(name, addr, review, rating);
+            revList.add(tempRev);
+        }
+
     }
 
     /**
