@@ -9,13 +9,9 @@ package pr4_1;
  *
  * @author Brennan
  */
-public class PR4_1 {
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
-    }
-    
+public class Reviewer {
+    String name;    // business/company name
+    String addr;    // address
+    String review;  // review
+    int rating;     // rating
 }
