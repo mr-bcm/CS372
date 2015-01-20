@@ -13,7 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
+ * Based on a given file path, a file is read in and its contents are stored.
+ * The file contents that were stored can also be retrieved.
  * @author Brennan
  */
 public class ReadFile {
@@ -26,7 +27,10 @@ public class ReadFile {
         this.filePath = filePath;
     }
 
-    // Returns a list of strings. Each itteration of the list is a new line.
+    /**
+     * File is read in based on its file path and the object's contents is updated
+     * with the data read in by this method.
+     */
     public void readFile() {
         file = new File(filePath);
 
@@ -49,6 +53,10 @@ public class ReadFile {
         }
     }
 
+    /**
+     * Returns a list of strings where each string is a line from the file that was read in.
+     * @return String List of file contents, line by line.
+     */
     public List<String> getContents() {
         return contents;
     }

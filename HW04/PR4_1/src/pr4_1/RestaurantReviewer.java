@@ -7,6 +7,7 @@ package pr4_1;
 
 import java.awt.Color;
 import java.awt.Point;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JComboBox;
@@ -14,6 +15,10 @@ import javax.swing.table.DefaultTableModel;
 import pr4_1.FileIO.*;
 
 /**
+ * Program is a GUI that allows a user to input information about a restaurant
+ * (name and address) and give the restaurant a written review and rating. As
+ * the reviews are entered, they are saved and can be viewed at any time by the
+ * current user, however the original reviews cannot be changed.
  *
  * @author Brennan
  */
@@ -22,7 +27,7 @@ public class RestaurantReviewer extends javax.swing.JFrame {
     DefaultTableModel model;    // for past reviews table (tbReviews)
     List<Reviewer> revList = new ArrayList<Reviewer>();
     int ratingChoice = 1;
-    String path = "C:\\Users\\Brennan\\Documents\\GitHub\\CS372\\HW04\\PR4_1\\src\\pr4_1\\FileIO\\TextTest.txt";
+    String path = "C:\\Users\\Brennan\\Documents\\GitHub\\CS372\\HW04\\PR4_1\\src\\pr4_1\\FileIO\\RestarauntReviews.txt";
 
     /**
      * Creates new form RestaurantReviewer
@@ -33,6 +38,10 @@ public class RestaurantReviewer extends javax.swing.JFrame {
         updateTable();
     }
 
+    /**
+     * The contents of a text file with saved data is loaded, parsed through,
+     * and turned into Reviewer objects for use during the program's session.
+     */
     public void RetrieveSavedData() {
         ReadFile rf = new ReadFile(path);
 
@@ -58,24 +67,29 @@ public class RestaurantReviewer extends javax.swing.JFrame {
                 tempList.add(tempRev);
             }
         } catch (Exception e) {
-            System.out.print("ERROR: ");
-            System.out.println(e.getMessage());
+            System.out.println("ERROR: Retrieving saved data");
             e.printStackTrace();
         }
     }
 
+    /**
+     * The table of saved restaurant reviews is loaded based on the Reviewer
+     * objects that are stored in the revList List. If a table with values is
+     * still being displayed, the old values are removed and updated with the
+     * current values.
+     */
     public void updateTable() {
         try {
             // Write the list of saved events to the JTable
             model = (DefaultTableModel) tbReviews.getModel();
-            
+
             // If the table has been previously populated we want to remove the old data
-            if (model.getRowCount() > 0){
-                for (int i = model.getRowCount() - 1; i > -1; i--){
+            if (model.getRowCount() > 0) {
+                for (int i = model.getRowCount() - 1; i > -1; i--) {
                     model.removeRow(i);
                 }
             }
-            
+
             for (int i = 0; i < revList.size(); i++) {
                 Object[] row = {revList.get(i).name, revList.get(i).rating};
                 model.addRow(row);
@@ -321,43 +335,61 @@ public class RestaurantReviewer extends javax.swing.JFrame {
                 tfRatingD.setText(rate);
             }
         } catch (Exception e) {
-            System.out.print("ERROR: ");
-            System.out.println(e.getMessage());
+            System.out.println("ERROR: Table click event");
             e.printStackTrace();
         }
     }//GEN-LAST:event_tbReviewsMouseClicked
 
+    /**
+     * When the "Submit Review" button is clicked the user entered fields are
+     * turned into a new Reviewer object, added to the list of current Reviewer
+     * objects (revList), and written to a textfile to be stored.
+     *
+     * @param evt
+     */
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
-        if (this.tfName.getText().isEmpty() || this.taReview.getText().isEmpty()) {
-            if (this.tfName.getText().isEmpty()) {
-                tfName.setBackground(Color.red);
-            } else if (this.taReview.getText().isEmpty()) {
-                taReview.setBackground(Color.red);
+        try {
+            if (this.tfName.getText().isEmpty() || this.taReview.getText().isEmpty()) {
+                if (this.tfName.getText().isEmpty()) {
+                    tfName.setBackground(Color.red);
+                } else if (this.taReview.getText().isEmpty()) {
+                    taReview.setBackground(Color.red);
+                }
+            } else {
+                tfName.setBackground(Color.white);
+                taReview.setBackground(Color.white);
+
+                // Get user input
+                this.tfName.getText();
+                this.tfAddr.getText();
+                this.taReview.getText();
+
+                Reviewer newEntry = new Reviewer(tfName.getText(), tfAddr.getText(), taReview.getText(), ratingChoice);  // Create new Reviewer object of newly added user data
+                revList.add(newEntry);                  // add the new entry to the list of existing ones
+                WriteFile wf = new WriteFile(path);     // initialize object to write to file
+                wf.writeString(newEntry.outputReviewerPattern());   // write the new review object to file
+
+                updateTable();
+
+                // Reset Text Boxes
+                tfName.setText("");
+                tfAddr.setText("");
+                taReview.setText("");
             }
-        } else {
-            tfName.setBackground(Color.white);
-            taReview.setBackground(Color.white);
-
-            // Get user input
-            this.tfName.getText();
-            this.tfAddr.getText();
-            this.taReview.getText();
-
-            Reviewer newEntry = new Reviewer(tfName.getText(), tfAddr.getText(), taReview.getText(), ratingChoice);  // Create new Reviewer object of newly added user data
-            revList.add(newEntry);                  // add the new entry to the list of existing ones
-            WriteFile wf = new WriteFile(path);     // initialize object to write to file
-            wf.writeString(newEntry.outputReviewerPattern());   // write the new review object to file
-
-            updateTable();
-
-            // Reset Text Boxes
-            tfName.setText("");
-            tfAddr.setText("");
-            taReview.setText("");
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.getStackTrace();
         }
-        // cbRating
     }//GEN-LAST:event_btnSubmitActionPerformed
 
+    /**
+     * The user's field selection in the combo box is recorded and the rating of
+     * their current review is set as appropriate.
+     *
+     * @param evt the user's action of clicking an option in the Rating combo
+     * box
+     */
     private void cbRatingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbRatingActionPerformed
         JComboBox cbox = (JComboBox) evt.getSource();
         String comboChoice = (String) cbox.getSelectedItem();
