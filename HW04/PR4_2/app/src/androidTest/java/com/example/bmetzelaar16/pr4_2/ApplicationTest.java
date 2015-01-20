@@ -1,4 +1,4 @@
-package com.example.brennan.coinflip;
+package com.example.bmetzelaar16.pr4_2;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

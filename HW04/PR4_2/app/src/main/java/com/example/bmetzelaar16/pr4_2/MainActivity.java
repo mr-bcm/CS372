@@ -1,12 +1,27 @@
-package com.example.brennan.coinflip;
+package com.example.bmetzelaar16.pr4_2;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
+
+import java.util.Random;
 
 
 public class MainActivity extends ActionBarActivity {
+
+    public void toggleCoin(View v) {
+        TextView f = (TextView)this.findViewById(R.id.tvNotifySide);
+        Random rnd = new Random();
+        int num = rnd.nextInt(2);
+        if (num == 0){
+            f.setText("Tails");
+        } else {
+            f.setText("Heads");
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

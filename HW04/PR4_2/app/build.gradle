@@ -5,8 +5,8 @@ android {
     buildToolsVersion "21.1.2"
 
     defaultConfig {
-        applicationId "com.example.brennan.coinflip"
-        minSdkVersion 10
+        applicationId "com.example.bmetzelaar16.pr4_2"
+        minSdkVersion 9
         targetSdkVersion 21
         versionCode 1
         versionName "1.0"
