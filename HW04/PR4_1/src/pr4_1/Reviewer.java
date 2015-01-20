@@ -21,4 +21,8 @@ public class Reviewer {
         this.review = review;
         this.rating = rating;
     }
+    
+    public String outputReviewerPattern(){
+        return name + "|" + addr + "|" + review + "|" + rating;
+    }
 }

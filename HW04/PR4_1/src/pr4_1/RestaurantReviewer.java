@@ -5,9 +5,11 @@
  */
 package pr4_1;
 
+import java.awt.Color;
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JComboBox;
 import javax.swing.table.DefaultTableModel;
 import pr4_1.FileIO.*;
 
@@ -18,20 +20,22 @@ import pr4_1.FileIO.*;
 public class RestaurantReviewer extends javax.swing.JFrame {
 
     DefaultTableModel model;    // for past reviews table (tbReviews)
-    List<Reviewer> revList = new ArrayList<Reviewer>();
+    int ratingChoice = 1;
+    String path = "C:\\Users\\Brennan\\Documents\\GitHub\\CS372\\HW04\\PR4_1\\src\\pr4_1\\FileIO\\TextTest.txt";
 
     /**
      * Creates new form RestaurantReviewer
      */
     public RestaurantReviewer() {
         initComponents();
+        // RetrieveSavedData();
         updateTable();
     }
 
-    public void updateTable() {
-        ReadFile rf = new ReadFile("C:\\Users\\Brennan\\Documents\\GitHub\\CS372\\HW04\\PR4_1\\src\\pr4_1\\FileIO\\TextTest.txt");
-        // ReadFile rf = new ReadFile("");
+    public List<Reviewer> RetrieveSavedData() {
+        ReadFile rf = new ReadFile(path);
 
+        List<Reviewer> revList = new ArrayList<Reviewer>();
         List<String> savedRevs = new ArrayList<String>();
         rf.readFile();
         savedRevs = rf.getContents();
@@ -41,16 +45,27 @@ public class RestaurantReviewer extends javax.swing.JFrame {
         String review = "";
         int rating = 0;
 
-        for (int i = 0; i < savedRevs.size(); i++) {
-            String[] temp = savedRevs.get(i).split("\\|");
-            name = temp[0];
-            addr = temp[1];
-            review = temp[2];
-            rating = Integer.parseInt(temp[3]);
+        try {
+            for (int i = 0; i < savedRevs.size(); i++) {
+                String[] temp = savedRevs.get(i).split("\\|");
+                name = temp[0];
+                addr = temp[1];
+                review = temp[2];
+                rating = Integer.parseInt(temp[3]);
 
-            Reviewer tempRev = new Reviewer(name, addr, review, rating);
-            revList.add(tempRev);
+                Reviewer tempRev = new Reviewer(name, addr, review, rating);
+                revList.add(tempRev);
+            }
+        } catch (Exception e) {
+            System.out.print("ERROR: ");
+            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
+        return revList;
+    }
+
+    public void updateTable() {
+        List<Reviewer> revList = RetrieveSavedData();
 
         try {
             // Write the list of saved events to the JTable
@@ -66,6 +81,7 @@ public class RestaurantReviewer extends javax.swing.JFrame {
             System.out.println("ERROR: Populating startup table.");
             System.out.print("MSG: ");
             System.out.println(e.getMessage());
+            e.printStackTrace();
         }
 
     }
@@ -103,16 +119,20 @@ public class RestaurantReviewer extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         taReview.setColumns(20);
+        taReview.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
         taReview.setLineWrap(true);
         taReview.setRows(5);
         jScrollPane1.setViewportView(taReview);
 
+        lbName.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
         lbName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbName.setText("Name");
 
+        lbAddr.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
         lbAddr.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbAddr.setText("Address");
 
+        lbRating.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
         lbRating.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbRating.setText("Rating");
 
@@ -140,12 +160,23 @@ public class RestaurantReviewer extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(tbReviews);
 
+        tfName.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
+
+        tfAddr.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
+
+        cbRating.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
         cbRating.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1 Star", "2 Star", "3 Star", "4 Star", "5 Star" }));
+        cbRating.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbRatingActionPerformed(evt);
+            }
+        });
 
         lbPReviews.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
         lbPReviews.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbPReviews.setText("Past Reviews");
 
+        btnSubmit.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
         btnSubmit.setText("Submit Review");
         btnSubmit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -208,30 +239,31 @@ public class RestaurantReviewer extends javax.swing.JFrame {
                     .addComponent(jScrollPane3))
                 .addGap(39, 39, 39))
             .addGroup(layout.createSequentialGroup()
-                .addGap(134, 134, 134)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(tfName)
-                            .addComponent(lbName, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(tfAddr)
-                            .addComponent(lbAddr, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(cbRating, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lbRating, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(112, 112, 112)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(btnSubmit)
-                        .addGap(175, 175, 175)))
+                        .addGap(175, 175, 175))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(tfName)
+                                .addComponent(lbName, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE))
+                            .addGap(18, 18, 18)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(tfAddr)
+                                .addComponent(lbAddr, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGap(18, 18, 18)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(cbRating, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(lbRating, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(43, 43, 43)
+                .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbName)
                     .addComponent(lbAddr)
@@ -242,10 +274,10 @@ public class RestaurantReviewer extends javax.swing.JFrame {
                     .addComponent(tfAddr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbRating, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnSubmit)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -270,28 +302,78 @@ public class RestaurantReviewer extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tbReviewsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbReviewsMouseClicked
-        // TODO add your handling code here:
+        List<Reviewer> revList = RetrieveSavedData();
+
         int row = tbReviews.rowAtPoint(new Point(evt.getX(), evt.getY()));
         int col = tbReviews.columnAtPoint(new Point(evt.getX(), evt.getY()));
 
-        if (evt.getClickCount() == 2) {
-            tfNameD.setText(revList.get(row).name);
-            tfAddrD.setText(revList.get(row).addr);
-            taReviewD.setText(revList.get(row).review);
-            String rate = "" + revList.get(row).rating;
-            tfRatingD.setText(rate);
-
-
-            // revList.get(row).name;
+        try {
+            if (evt.getClickCount() == 2) {
+                tfNameD.setText(revList.get(row).name);
+                tfAddrD.setText(revList.get(row).addr);
+                taReviewD.setText(revList.get(row).review);
+                String rate = "" + revList.get(row).rating;
+                tfRatingD.setText(rate);
+            }
+        } catch (Exception e) {
+            System.out.print("ERROR: ");
+            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
     }//GEN-LAST:event_tbReviewsMouseClicked
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
-        // TODO add your handling code here:
-        tfName
-                tfAddr
-                taReview
+        if (this.tfName.getText().isEmpty() || this.taReview.getText().isEmpty()) {
+            if (this.tfName.getText().isEmpty()) {
+                tfName.setBackground(Color.red);
+            } else if (this.taReview.getText().isEmpty()) {
+                taReview.setBackground(Color.red);
+            }
+        } else {
+            tfName.setBackground(Color.white);
+            taReview.setBackground(Color.white);
+
+            // Get user input
+            this.tfName.getText();
+            this.tfAddr.getText();
+            this.taReview.getText();
+
+            Reviewer newEntry = new Reviewer(tfName.getText(), tfAddr.getText(), taReview.getText(), ratingChoice);  // Create new Reviewer object of newly added user data
+            // revList.add(newEntry);                  // add the new entry to the list of existing ones
+            WriteFile wf = new WriteFile(path);     // initialize object to write to file
+            wf.writeString(newEntry.outputReviewerPattern());   // write the new review object to file
+
+            updateTable();
+
+            // Reset Text Boxes
+            tfName.setText("");
+            tfAddr.setText("");
+            taReview.setText("");
+        }
+        // cbRating
     }//GEN-LAST:event_btnSubmitActionPerformed
+
+    private void cbRatingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbRatingActionPerformed
+        JComboBox cbox = (JComboBox) evt.getSource();
+        String comboChoice = (String) cbox.getSelectedItem();
+
+        try {
+            if (comboChoice.equals("1 Star")) {
+                ratingChoice = 1;
+            } else if (comboChoice.equals("2 Star")) {
+                ratingChoice = 2;
+            } else if (comboChoice.equals("3 Star")) {
+                ratingChoice = 3;
+            } else if (comboChoice.equals("4 Star")) {
+                ratingChoice = 4;
+            } else if (comboChoice.equals("5 Star")) {
+                ratingChoice = 5;
+            }
+        } catch (Exception e) {
+            System.out.print("ERROR: ");
+            System.out.println(e.getMessage());
+        }
+    }//GEN-LAST:event_cbRatingActionPerformed
 
     /**
      * @param args the command line arguments
