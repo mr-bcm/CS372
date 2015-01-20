@@ -7,6 +7,7 @@ package pr4_1;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.table.DefaultTableModel;
 import pr4_1.FileIO.*;
 
 /**
@@ -14,29 +15,25 @@ import pr4_1.FileIO.*;
  * @author Brennan
  */
 public class RestaurantReviewer extends javax.swing.JFrame {
+        DefaultTableModel model;    // for past reviews table (tbReviews)
 
+    
     /**
      * Creates new form RestaurantReviewer
      */
     public RestaurantReviewer() {
         initComponents();
-
+        popReviewTbl();
     }
 
     public void popReviewTbl() {
         ReadFile rf = new ReadFile("C:\\Users\\Brennan\\Documents\\GitHub\\CS372\\HW04\\PR4_1\\src\\pr4_1\\FileIO\\TextTest.txt");
         // ReadFile rf = new ReadFile("");
 
-        // READ FROM FILE TEST
         List<String> savedRevs = new ArrayList<String>();
         rf.readFile();
         savedRevs = rf.getContents();
 
-//            System.out.println(savedRevs.get(1));
-//            String[] linesplit = savedRevs.get(1).split("\\|");
-//            System.out.println(linesplit[0]);
-//            System.out.println(linesplit[1]);
-//            System.out.println(linesplit[2]);
         List<Reviewer> revList = new ArrayList<Reviewer>();
         String name = "";
         String addr = "";
@@ -52,6 +49,28 @@ public class RestaurantReviewer extends javax.swing.JFrame {
 
             Reviewer tempRev = new Reviewer(name, addr, review, rating);
             revList.add(tempRev);
+        }
+        
+        
+        
+        
+        try {
+            // List<Event> savedEvents = readFromFile();
+            // Collections.sort(savedEvents, new CompareEvents()); // Initial Table Sort
+
+            // Write the list of saved events to the JTable
+            model = (DefaultTableModel) tbReviews.getModel();
+            for (int i = 0; i < revList.size(); i++) {
+                Object[] row = {revList.get(i).name, revList.get(i).rating};
+                model.addRow(row);
+            }
+
+            // Sort Table On Table Header Click
+            tbReviews.setAutoCreateRowSorter(rootPaneCheckingEnabled);
+        } catch (Exception e) {
+            System.out.println("ERROR: Populating startup table.");
+            System.out.print("MSG: ");
+            System.out.println(e.getMessage());
         }
 
     }
@@ -71,7 +90,7 @@ public class RestaurantReviewer extends javax.swing.JFrame {
         lbAddr = new javax.swing.JLabel();
         lbRating = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tblPReviews = new javax.swing.JTable();
+        tbReviews = new javax.swing.JTable();
         tfName = new javax.swing.JTextField();
         tfAddr = new javax.swing.JTextField();
         cbRating = new javax.swing.JComboBox();
@@ -93,7 +112,7 @@ public class RestaurantReviewer extends javax.swing.JFrame {
         lbRating.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbRating.setText("Rating");
 
-        tblPReviews.setModel(new javax.swing.table.DefaultTableModel(
+        tbReviews.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -109,7 +128,7 @@ public class RestaurantReviewer extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(tblPReviews);
+        jScrollPane2.setViewportView(tbReviews);
 
         cbRating.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1 Star", "2 Star", "3 Star", "4 Star", "5 Star" }));
 
@@ -221,7 +240,7 @@ public class RestaurantReviewer extends javax.swing.JFrame {
     private javax.swing.JLabel lbPReviews;
     private javax.swing.JLabel lbRating;
     private javax.swing.JTextArea taReview;
-    private javax.swing.JTable tblPReviews;
+    private javax.swing.JTable tbReviews;
     private javax.swing.JTextField tfAddr;
     private javax.swing.JTextField tfName;
     // End of variables declaration//GEN-END:variables
