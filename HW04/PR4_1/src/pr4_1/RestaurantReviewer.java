@@ -5,6 +5,7 @@
  */
 package pr4_1;
 
+import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
@@ -15,18 +16,19 @@ import pr4_1.FileIO.*;
  * @author Brennan
  */
 public class RestaurantReviewer extends javax.swing.JFrame {
-        DefaultTableModel model;    // for past reviews table (tbReviews)
 
-    
+    DefaultTableModel model;    // for past reviews table (tbReviews)
+    List<Reviewer> revList = new ArrayList<Reviewer>();
+
     /**
      * Creates new form RestaurantReviewer
      */
     public RestaurantReviewer() {
         initComponents();
-        popReviewTbl();
+        updateTable();
     }
 
-    public void popReviewTbl() {
+    public void updateTable() {
         ReadFile rf = new ReadFile("C:\\Users\\Brennan\\Documents\\GitHub\\CS372\\HW04\\PR4_1\\src\\pr4_1\\FileIO\\TextTest.txt");
         // ReadFile rf = new ReadFile("");
 
@@ -34,7 +36,6 @@ public class RestaurantReviewer extends javax.swing.JFrame {
         rf.readFile();
         savedRevs = rf.getContents();
 
-        List<Reviewer> revList = new ArrayList<Reviewer>();
         String name = "";
         String addr = "";
         String review = "";
@@ -50,14 +51,8 @@ public class RestaurantReviewer extends javax.swing.JFrame {
             Reviewer tempRev = new Reviewer(name, addr, review, rating);
             revList.add(tempRev);
         }
-        
-        
-        
-        
-        try {
-            // List<Event> savedEvents = readFromFile();
-            // Collections.sort(savedEvents, new CompareEvents()); // Initial Table Sort
 
+        try {
             // Write the list of saved events to the JTable
             model = (DefaultTableModel) tbReviews.getModel();
             for (int i = 0; i < revList.size(); i++) {
@@ -96,10 +91,19 @@ public class RestaurantReviewer extends javax.swing.JFrame {
         cbRating = new javax.swing.JComboBox();
         lbPReviews = new javax.swing.JLabel();
         btnSubmit = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        taReviewD = new javax.swing.JTextArea();
+        lbName1 = new javax.swing.JLabel();
+        lbAddr1 = new javax.swing.JLabel();
+        lbRating1 = new javax.swing.JLabel();
+        tfNameD = new javax.swing.JTextField();
+        tfAddrD = new javax.swing.JTextField();
+        tfRatingD = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         taReview.setColumns(20);
+        taReview.setLineWrap(true);
         taReview.setRows(5);
         jScrollPane1.setViewportView(taReview);
 
@@ -112,6 +116,7 @@ public class RestaurantReviewer extends javax.swing.JFrame {
         lbRating.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbRating.setText("Rating");
 
+        tbReviews.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
         tbReviews.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -128,72 +133,165 @@ public class RestaurantReviewer extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tbReviews.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbReviewsMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tbReviews);
 
         cbRating.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1 Star", "2 Star", "3 Star", "4 Star", "5 Star" }));
 
+        lbPReviews.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
         lbPReviews.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbPReviews.setText("Past Reviews");
 
         btnSubmit.setText("Submit Review");
+        btnSubmit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSubmitActionPerformed(evt);
+            }
+        });
+
+        taReviewD.setEditable(false);
+        taReviewD.setColumns(20);
+        taReviewD.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
+        taReviewD.setLineWrap(true);
+        taReviewD.setRows(5);
+        jScrollPane3.setViewportView(taReviewD);
+
+        lbName1.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
+        lbName1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbName1.setText("Restaraunt");
+
+        lbAddr1.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
+        lbAddr1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbAddr1.setText("Address");
+
+        lbRating1.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
+        lbRating1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbRating1.setText("Rating");
+
+        tfNameD.setEditable(false);
+        tfNameD.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
+
+        tfAddrD.setEditable(false);
+        tfAddrD.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
+
+        tfRatingD.setEditable(false);
+        tfRatingD.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(19, 19, 19)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
-                    .addComponent(lbPReviews, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(lbPReviews, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lbName1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tfNameD, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbAddr1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tfAddrD, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(tfRatingD)
+                            .addComponent(lbRating1, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)))
+                    .addComponent(jScrollPane3))
+                .addGap(39, 39, 39))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(134, 134, 134)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(tfName)
-                                    .addComponent(lbName, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(tfAddr)
-                                    .addComponent(lbAddr, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(cbRating, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(lbRating, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jScrollPane1))
-                        .addGap(46, 46, 46))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(tfName)
+                            .addComponent(lbName, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(tfAddr)
+                            .addComponent(lbAddr, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(cbRating, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lbRating, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(btnSubmit)
-                        .addGap(221, 221, 221))))
+                        .addGap(175, 175, 175)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(65, Short.MAX_VALUE)
+                .addGap(43, 43, 43)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbName)
                     .addComponent(lbAddr)
-                    .addComponent(lbRating)
-                    .addComponent(lbPReviews))
+                    .addComponent(lbRating))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tfName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfAddr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbRating, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnSubmit)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(tfName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tfAddr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cbRating, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(27, 27, 27)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnSubmit))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(40, 40, 40))
+                            .addComponent(lbName1)
+                            .addComponent(lbAddr1)
+                            .addComponent(lbRating1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(tfNameD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tfAddrD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tfRatingD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lbPReviews)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                .addGap(33, 33, 33))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void tbReviewsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbReviewsMouseClicked
+        // TODO add your handling code here:
+        int row = tbReviews.rowAtPoint(new Point(evt.getX(), evt.getY()));
+        int col = tbReviews.columnAtPoint(new Point(evt.getX(), evt.getY()));
+
+        if (evt.getClickCount() == 2) {
+            tfNameD.setText(revList.get(row).name);
+            tfAddrD.setText(revList.get(row).addr);
+            taReviewD.setText(revList.get(row).review);
+            String rate = "" + revList.get(row).rating;
+            tfRatingD.setText(rate);
+
+
+            // revList.get(row).name;
+        }
+    }//GEN-LAST:event_tbReviewsMouseClicked
+
+    private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
+        // TODO add your handling code here:
+        tfName
+                tfAddr
+                taReview
+    }//GEN-LAST:event_btnSubmitActionPerformed
 
     /**
      * @param args the command line arguments
@@ -235,13 +333,21 @@ public class RestaurantReviewer extends javax.swing.JFrame {
     private javax.swing.JComboBox cbRating;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel lbAddr;
+    private javax.swing.JLabel lbAddr1;
     private javax.swing.JLabel lbName;
+    private javax.swing.JLabel lbName1;
     private javax.swing.JLabel lbPReviews;
     private javax.swing.JLabel lbRating;
+    private javax.swing.JLabel lbRating1;
     private javax.swing.JTextArea taReview;
+    private javax.swing.JTextArea taReviewD;
     private javax.swing.JTable tbReviews;
     private javax.swing.JTextField tfAddr;
+    private javax.swing.JTextField tfAddrD;
     private javax.swing.JTextField tfName;
+    private javax.swing.JTextField tfNameD;
+    private javax.swing.JTextField tfRatingD;
     // End of variables declaration//GEN-END:variables
 }
