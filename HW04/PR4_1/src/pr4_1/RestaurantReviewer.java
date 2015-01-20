@@ -20,6 +20,7 @@ import pr4_1.FileIO.*;
 public class RestaurantReviewer extends javax.swing.JFrame {
 
     DefaultTableModel model;    // for past reviews table (tbReviews)
+    List<Reviewer> revList = new ArrayList<Reviewer>();
     int ratingChoice = 1;
     String path = "C:\\Users\\Brennan\\Documents\\GitHub\\CS372\\HW04\\PR4_1\\src\\pr4_1\\FileIO\\TextTest.txt";
 
@@ -28,14 +29,14 @@ public class RestaurantReviewer extends javax.swing.JFrame {
      */
     public RestaurantReviewer() {
         initComponents();
-        // RetrieveSavedData();
+        RetrieveSavedData();
         updateTable();
     }
 
-    public List<Reviewer> RetrieveSavedData() {
+    public void RetrieveSavedData() {
         ReadFile rf = new ReadFile(path);
 
-        List<Reviewer> revList = new ArrayList<Reviewer>();
+        List<Reviewer> tempList = revList;
         List<String> savedRevs = new ArrayList<String>();
         rf.readFile();
         savedRevs = rf.getContents();
@@ -54,22 +55,27 @@ public class RestaurantReviewer extends javax.swing.JFrame {
                 rating = Integer.parseInt(temp[3]);
 
                 Reviewer tempRev = new Reviewer(name, addr, review, rating);
-                revList.add(tempRev);
+                tempList.add(tempRev);
             }
         } catch (Exception e) {
             System.out.print("ERROR: ");
             System.out.println(e.getMessage());
             e.printStackTrace();
         }
-        return revList;
     }
 
     public void updateTable() {
-        List<Reviewer> revList = RetrieveSavedData();
-
         try {
             // Write the list of saved events to the JTable
             model = (DefaultTableModel) tbReviews.getModel();
+            
+            // If the table has been previously populated we want to remove the old data
+            if (model.getRowCount() > 0){
+                for (int i = model.getRowCount() - 1; i > -1; i--){
+                    model.removeRow(i);
+                }
+            }
+            
             for (int i = 0; i < revList.size(); i++) {
                 Object[] row = {revList.get(i).name, revList.get(i).rating};
                 model.addRow(row);
@@ -79,8 +85,6 @@ public class RestaurantReviewer extends javax.swing.JFrame {
             tbReviews.setAutoCreateRowSorter(rootPaneCheckingEnabled);
         } catch (Exception e) {
             System.out.println("ERROR: Populating startup table.");
-            System.out.print("MSG: ");
-            System.out.println(e.getMessage());
             e.printStackTrace();
         }
 
@@ -159,6 +163,9 @@ public class RestaurantReviewer extends javax.swing.JFrame {
             }
         });
         jScrollPane2.setViewportView(tbReviews);
+        if (tbReviews.getColumnModel().getColumnCount() > 0) {
+            tbReviews.getColumnModel().getColumn(1).setMaxWidth(50);
+        }
 
         tfName.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
 
@@ -302,8 +309,6 @@ public class RestaurantReviewer extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tbReviewsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbReviewsMouseClicked
-        List<Reviewer> revList = RetrieveSavedData();
-
         int row = tbReviews.rowAtPoint(new Point(evt.getX(), evt.getY()));
         int col = tbReviews.columnAtPoint(new Point(evt.getX(), evt.getY()));
 
@@ -339,7 +344,7 @@ public class RestaurantReviewer extends javax.swing.JFrame {
             this.taReview.getText();
 
             Reviewer newEntry = new Reviewer(tfName.getText(), tfAddr.getText(), taReview.getText(), ratingChoice);  // Create new Reviewer object of newly added user data
-            // revList.add(newEntry);                  // add the new entry to the list of existing ones
+            revList.add(newEntry);                  // add the new entry to the list of existing ones
             WriteFile wf = new WriteFile(path);     // initialize object to write to file
             wf.writeString(newEntry.outputReviewerPattern());   // write the new review object to file
 
