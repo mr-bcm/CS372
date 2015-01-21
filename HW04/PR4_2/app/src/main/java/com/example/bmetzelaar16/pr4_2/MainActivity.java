@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.Random;
@@ -14,12 +15,15 @@ public class MainActivity extends ActionBarActivity {
 
     public void toggleCoin(View v) {
         TextView f = (TextView)this.findViewById(R.id.tvNotifySide);
+        ImageView pic = (ImageView)this.findViewById(R.id.imageView);
         Random rnd = new Random();
         int num = rnd.nextInt(2);
         if (num == 0){
-            f.setText("Tails");
-        } else {
             f.setText("Heads");
+            pic.setImageResource(R.drawable.heads);
+        } else {
+            f.setText("Tails");
+            pic.setImageResource(R.drawable.tails);
         }
     }
 
