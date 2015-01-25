@@ -1,0 +1,4 @@
+Habitable Zone
+===============
+make sure distance is in kilometers
+halve the distance
