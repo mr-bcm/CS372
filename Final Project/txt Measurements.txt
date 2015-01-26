@@ -1,0 +1,28 @@
+==========
+COMPLETED
+==========
+-JavaDoc
+-Try Catch/Exceptions (illegal/negative values, out of range)
+
+=====
+TODO
+=====
+-Mars L and Mass can be 0, needs fix
+-Powerpoint
+ => Title Page
+ => What is our project, why did we choose it, goals of project
+ => Project design/uml
+ => Application, progress, details (screenshots)
+ => Demo
+ => Challenges, Problems, Victories
+ => What would we do again, what wouldn't we do?
+
+
+
+
+
+Notes:
+-top 20px
+-left 27px
+-right 90px
+-between radio buttons ~120px
