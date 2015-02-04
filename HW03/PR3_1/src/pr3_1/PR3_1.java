@@ -5,6 +5,7 @@
  * Due: 1/13/2015
  */
 package pr3_1;
+//PT -- Nice!
 import pr2_6.ValueRange;    // used for min, max, and average
 
 import java.util.*; // Scanner, List, ListArray
@@ -24,6 +25,7 @@ public class PR3_1 {
      * @param args not supported
      */
     public static void main(String[] args) {
+        //PT -- Good use of List type here
         List<Integer> l = new ArrayList<Integer>();
         ValueRange vr = new ValueRange();
 

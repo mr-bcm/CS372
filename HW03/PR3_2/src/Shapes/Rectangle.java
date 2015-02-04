@@ -23,6 +23,7 @@ public class Rectangle {
         if ((width <= 0) || (height <= 0)) {    // Checking for 0 and negatives
             throw new Exception ("Rectangle height and width must be above 0.\n");
         } else if (width == height){
+            //PT -- Interesting limitation.
             throw new Exception ("Rectangles are not squares, the height and "
                                                  + "width must be different.\n");
         }else {
