@@ -25,7 +25,7 @@ public class UnderOver extends javax.swing.JFrame {
      * @param storedUsers List that contains all of the users that have played the game.
      */
     public void readFile(List<String> storedUsers) {
-        File f = new File("Z:\\GitHub\\CS372\\Exams\\Exam1\\src\\exam1\\users.txt");
+        File f = new File("users.txt");
         try {
             BufferedReader rdr = new BufferedReader(new FileReader(f));
             String line;
@@ -48,7 +48,7 @@ public class UnderOver extends javax.swing.JFrame {
      * @param username the name of the new user
      */
     public void writeFile(String username) {
-        File f = new File("Z:\\GitHub\\CS372\\Exams\\Exam1\\src\\exam1\\users.txt");
+        File f = new File("users.txt");
         try {
             BufferedWriter wrtr = new BufferedWriter(new FileWriter(f, true));
             wrtr.write(username);
