@@ -31,7 +31,7 @@ public class Reviewer {
      * @throws Exception value for rating is out of bounds (must be 1-5)
      */
     public Reviewer(String name, String addr, String review, int rating) throws Exception {
-        if ((rating < 1) || (rating > 5)) {
+        if ((rating < 1) || (rating > 5)) { //PT -- good
             throw new Exception("Rating must have an integer value between 1-5\n");
         } else {
             this.name = name;
