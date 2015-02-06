@@ -30,6 +30,7 @@ public class Calculations {
      */
     public Calculations(Double planetMass, Double angMomentum) throws Exception {
         if (planetMass <= 0) {
+            //PT -- IllegalArgumentException, rather than generic exception?
             throw new Exception("Planet must have a mass!");
         }
         m = planetMass;
