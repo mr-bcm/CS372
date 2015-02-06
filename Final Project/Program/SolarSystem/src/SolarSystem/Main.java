@@ -599,6 +599,7 @@ public class Main extends javax.swing.JFrame {
             // TODO add your handling code here:
             mass = .81;
             angMom = 3.000;
+            //PT -- this looks similar enough to the code in addPlanetActionPerformed. Maybe break into a single function?
             URL url = this.getClass().getClassLoader().getResource("Resources/sVenus.png");
             img = ImageIO.read(url);
             ss.addPlanet(new Planet(mass, angMom, xScreen / 2, yScreen / 2, img));
